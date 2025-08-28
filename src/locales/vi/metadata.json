@@ -1,0 +1,11 @@
+{
+  "login": {
+    "title": "Đăng nhập"
+  },
+  "register": {
+    "title": "Đăng ký"
+  },
+  "forgotPassword": {
+    "title": "Quên mật khẩu"
+  }
+}

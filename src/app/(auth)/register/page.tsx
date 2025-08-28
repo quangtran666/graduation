@@ -2,11 +2,15 @@ import { GalleryVerticalEnd } from "lucide-react";
 
 import { RegisterForm } from "@/features/auth/register/register-form";
 import Link from "next/link";
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Register",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("metadata");
+
+  return {
+    title: t("register.title"),
+  };
+}
 
 export default function RegisterPage() {
   return (

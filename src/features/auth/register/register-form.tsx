@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { ComponentProps } from "react";
 
 export async function RegisterForm({ className, ...props }: ComponentProps<"form">) {
-  const t = await getTranslations();
+  const t = await getTranslations("form");
 
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>

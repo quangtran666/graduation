@@ -3,11 +3,15 @@ import { GalleryVerticalEnd } from "lucide-react";
 import { LoginForm } from "@/features/auth/login/login-form";
 import { ModeToggle } from "@/components/common/theme-switch";
 import Link from "next/link";
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Login",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("metadata");
+
+  return {
+    title: t("login.title"),
+  };
+}
 
 export default function LoginPage() {
   return (
