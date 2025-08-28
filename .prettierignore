@@ -1,0 +1,8 @@
+build/
+public
+node_modules/
+package-lock.json
+yarn.lock
+bun.lock
+.yarn/
+.next
