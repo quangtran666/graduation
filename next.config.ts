@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./src/locales/request.ts");
+export default withNextIntl(nextConfig);

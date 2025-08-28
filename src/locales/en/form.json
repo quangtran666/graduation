@@ -1,0 +1,37 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "orContinueWith": "Or continue with",
+    "signInWith": "Login with {provider}",
+    "signUpWith": "Sign up with {provider}",
+    "backTo": "Back to {page}"
+  },
+  "login": {
+    "pageTitle": "Login",
+    "title": "Login to your account",
+    "description": "Enter your email below to login to your account",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
+  },
+  "register": {
+    "pageTitle": "Register",
+    "title": "Create an account",
+    "description": "Enter your email below to create an account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "signUp": "Sign up",
+    "firstName": "First name",
+    "lastName": "Last name"
+  },
+  "forgotPassword": {
+    "title": "Forgot your password?",
+    "description": "Enter your email below to reset your password",
+    "email": "Email",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Remember your password?"
+  }
+}

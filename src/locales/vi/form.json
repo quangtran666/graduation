@@ -1,0 +1,37 @@
+{
+  "common": {
+    "signIn": "Đăng nhập",
+    "orContinueWith": "Hoặc tiếp tục với",
+    "signInWith": "Đăng nhập với {provider}",
+    "signUpWith": "Đăng ký với {provider}",
+    "backTo": "Quay lại {page}"
+  },
+  "login": {
+    "pageTitle": "Đăng nhập",
+    "title": "Đăng nhập vào tài khoản của bạn",
+    "description": "Nhập email bên dưới để đăng nhập vào tài khoản của bạn",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "forgotPassword": "Quên mật khẩu?",
+    "noAccount": "Không có tài khoản?",
+    "signUp": "Đăng ký"
+  },
+  "register": {
+    "pageTitle": "Đăng ký",
+    "title": "Tạo tài khoản",
+    "description": "Nhập email bên dưới để tạo tài khoản",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "signUp": "Đăng ký",
+    "firstName": "Tên",
+    "lastName": "Họ"
+  },
+  "forgotPassword": {
+    "title": "Quên mật khẩu?",
+    "description": "Nhập email bên dưới để đặt lại mật khẩu",
+    "email": "Email",
+    "resetPassword": "Đặt lại mật khẩu",
+    "rememberPassword": "Nhớ mật khẩu?"
+  }
+}

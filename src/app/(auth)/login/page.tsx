@@ -1,7 +1,7 @@
 import { GalleryVerticalEnd } from "lucide-react";
 
 import { LoginForm } from "@/features/auth/login/login-form";
-import { ModeToggle } from "@/components/theme-switch";
+import { ModeToggle } from "@/components/common/theme-switch";
 import Link from "next/link";
 import { Metadata } from "next";
 
