@@ -4,6 +4,7 @@ import { LoginForm } from "@/features/auth/login/login-form";
 import { ModeToggle } from "@/components/common/theme-switch";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { LanguageSwitcher } from "@/components/common/language-switcher";
 
 export async function generateMetadata() {
   const t = await getTranslations("metadata");
@@ -24,6 +25,7 @@ export default function LoginPage() {
             </div>
             Acme Inc.
           </Link>
+          <LanguageSwitcher />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
