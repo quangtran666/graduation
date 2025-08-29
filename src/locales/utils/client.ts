@@ -1,5 +1,4 @@
-"use client";
-
+import "client-only";
 import Cookies from "js-cookie";
 import { type Locale } from "next-intl";
 import { LOCALE_COOKIE_NAME, DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../constant";

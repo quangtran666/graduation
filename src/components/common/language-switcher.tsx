@@ -33,17 +33,18 @@ export function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {SUPPORTED_LOCALES.map((supportedLocale) => (
-          <DropdownMenuItem
-            key={supportedLocale}
-            onClick={() => changeLocale(supportedLocale)}
-            className={locale === supportedLocale ? "bg-accent" : ""}
-          >
-            <span className="mr-2">{supportedLocale === "en" ? "🇺🇸" : "🇻🇳"}</span>
-            {LOCALE_LABELS[supportedLocale]}
-            {locale === supportedLocale && <span className="ml-auto">✓</span>}
-          </DropdownMenuItem>
-        ))}
+        <div className="flex flex-col gap-1">
+          {SUPPORTED_LOCALES.map((supportedLocale) => (
+            <DropdownMenuItem
+              key={supportedLocale}
+              onClick={() => changeLocale(supportedLocale)}
+              className={locale === supportedLocale ? "bg-accent" : ""}
+            >
+              <span className="mr-2">{supportedLocale === "en" ? "🇺🇸" : "🇻🇳"}</span>
+              {LOCALE_LABELS[supportedLocale]}
+            </DropdownMenuItem>
+          ))}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

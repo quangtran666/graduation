@@ -1,5 +1,4 @@
-"use client";
-
+import "client-only";
 import { setClientLocale } from "@/locales/utils/client";
 import { type Locale, useLocale } from "next-intl";
 import { useState } from "react";
