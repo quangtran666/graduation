@@ -4,7 +4,19 @@
     "orContinueWith": "Or continue with",
     "signInWith": "Login with {provider}",
     "signUpWith": "Sign up with {provider}",
-    "backTo": "Back to {page}"
+    "backTo": "Back to {page}",
+    "form": {
+      "name": {
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password"
+      },
+      "required": "This {field} is required",
+      "min": "The field must be at least {length} characters long",
+      "max": "The field must be at most {length} characters long",
+      "emailNoAt": "{field} cannot be an email address"
+    }
   },
   "login": {
     "pageTitle": "Login",
@@ -24,8 +36,17 @@
     "password": "Password",
     "confirmPassword": "Confirm password",
     "signUp": "Sign up",
-    "firstName": "First name",
-    "lastName": "Last name"
+    "username": "Username",
+    "validation": {
+      "email": "Email is required",
+      "password": "Password is required",
+      "username": "Username is required",
+      "confirmPassword": "Confirm password is required",
+      "passwordMismatch": "Passwords do not match",
+      "usernameNoSpaces": "Username cannot contain spaces"
+    },
+    "success": "Account created successfully",
+    "error": "Account creation failed"
   },
   "forgotPassword": {
     "title": "Forgot your password?",

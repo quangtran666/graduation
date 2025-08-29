@@ -1,7 +1,6 @@
 "use client";
 
 import { useLocaleManager } from "@/hooks/use-locale-manager";
-import { type Locale } from "next-intl";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,12 +9,13 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { Languages, Loader2 } from "lucide-react";
-import { SUPPORTED_LOCALES } from "@/locales/constant";
-
-const LOCALE_LABELS: Record<Locale, string> = {
-  en: "English",
-  vi: "Tiếng Việt",
-};
+import {
+  getLocaleFlag,
+  getLocaleLabel,
+  LOCALE_CONFIG,
+  SUPPORTED_LOCALES,
+  SupportedLocale,
+} from "@/constants/locale";
 
 export function LanguageSwitcher() {
   const { locale, isChanging, changeLocale } = useLocaleManager();
@@ -29,7 +29,7 @@ export function LanguageSwitcher() {
           ) : (
             <Languages className="h-4 w-4" />
           )}
-          <span className="ml-2">{LOCALE_LABELS[locale]}</span>
+          <span className="ml-2">{LOCALE_CONFIG[locale as SupportedLocale].label}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -40,8 +40,8 @@ export function LanguageSwitcher() {
               onClick={() => changeLocale(supportedLocale)}
               className={locale === supportedLocale ? "bg-accent" : ""}
             >
-              <span className="mr-2">{supportedLocale === "en" ? "🇺🇸" : "🇻🇳"}</span>
-              {LOCALE_LABELS[supportedLocale]}
+              <span className="mr-2">{getLocaleFlag(supportedLocale)}</span>
+              {getLocaleLabel(supportedLocale)}
             </DropdownMenuItem>
           ))}
         </div>

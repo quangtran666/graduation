@@ -21,6 +21,9 @@ const eslintConfig = [
       "no-unused-vars": ["error"],
       "object-shorthand": ["error", "always"],
       "arrow-body-style": ["error", "as-needed"],
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "curly": ["error", "multi-or-nest"]
     }
   }),
   {

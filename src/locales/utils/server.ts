@@ -1,26 +1,24 @@
 import "server-only";
 import { cookies } from "next/headers";
-import { type Locale } from "next-intl";
 import {
   LOCALE_COOKIE_NAME,
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
   LOCALE_COOKIE_EXPIRES,
-} from "../constant";
+  SupportedLocale,
+} from "../../constants/locale";
 
-export async function getServerLocale(): Promise<Locale> {
+export async function getServerLocale(): Promise<SupportedLocale> {
   const cookieStore = await cookies();
-  const locale = cookieStore.get(LOCALE_COOKIE_NAME)?.value as Locale;
+  const locale = cookieStore.get(LOCALE_COOKIE_NAME)?.value as SupportedLocale;
 
   return SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
 }
 
-export async function setServerLocale(locale: Locale): Promise<void> {
+export async function setServerLocale(locale: SupportedLocale): Promise<void> {
   const cookieStore = await cookies();
 
-  if (!SUPPORTED_LOCALES.includes(locale)) {
-    throw new Error(`Unsupported locale: ${locale}`);
-  }
+  if (!SUPPORTED_LOCALES.includes(locale)) throw new Error(`Unsupported locale: ${locale}`);
 
   cookieStore.set(LOCALE_COOKIE_NAME, locale, {
     expires: LOCALE_COOKIE_EXPIRES,

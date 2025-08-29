@@ -15,6 +15,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
+import { cva } from "class-variance-authority";
 
 const Form = FormProvider;
 
@@ -79,14 +80,18 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) {
+interface FormLabelProps extends React.ComponentProps<typeof LabelPrimitive.Root> {
+  showErrorStyle?: boolean;
+}
+
+function FormLabel({ className, showErrorStyle, ...props }: FormLabelProps) {
   const { error, formItemId } = useFormField();
 
   return (
     <Label
       data-slot="form-label"
       data-error={!!error}
-      className={cn("data-[error=true]:text-destructive", className)}
+      className={cn(showErrorStyle && "data-[error=true]:text-destructive", className)}
       htmlFor={formItemId}
       {...props}
     />

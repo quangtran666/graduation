@@ -4,7 +4,19 @@
     "orContinueWith": "Hoặc tiếp tục với",
     "signInWith": "Đăng nhập với {provider}",
     "signUpWith": "Đăng ký với {provider}",
-    "backTo": "Quay lại {page}"
+    "backTo": "Quay lại {page}",
+    "form": {
+      "name": {
+        "username": "Tên người dùng",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "confirmPassword": "Xác nhận mật khẩu"
+      },
+      "required": "Trường {field} là bắt buộc",
+      "min": "Trường phải có ít nhất {length} ký tự",
+      "max": "Trường phải có nhiều nhất {length} ký tự",
+      "emailNoAt": "{field} không được là địa chỉ email"
+    }
   },
   "login": {
     "pageTitle": "Đăng nhập",
@@ -24,8 +36,17 @@
     "password": "Mật khẩu",
     "confirmPassword": "Xác nhận mật khẩu",
     "signUp": "Đăng ký",
-    "firstName": "Tên",
-    "lastName": "Họ"
+    "username": "Tên người dùng",
+    "validation": {
+      "email": "Email là bắt buộc",
+      "password": "Mật khẩu là bắt buộc",
+      "username": "Tên người dùng là bắt buộc",
+      "confirmPassword": "Xác nhận mật khẩu là bắt buộc",
+      "passwordMismatch": "Mật khẩu không khớp",
+      "usernameNoSpaces": "Tên người dùng không được chứa khoảng trắng"
+    },
+    "success": "Tạo tài khoản thành công",
+    "error": "Tạo tài khoản thất bại"
   },
   "forgotPassword": {
     "title": "Quên mật khẩu?",
