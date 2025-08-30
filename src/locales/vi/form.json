@@ -66,5 +66,19 @@
       "emailInvalid": "Email không hợp lệ"
     },
     "success": "Email đặt lại mật khẩu đã được gửi thành công. Vui lòng kiểm tra email của bạn."
+  },
+  "resetPassword": {
+    "title": "Đặt lại mật khẩu",
+    "description": "Nhập mật khẩu mới bên dưới",
+    "password": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "resetPassword": "Đặt lại mật khẩu",
+    "rememberPassword": "Nhớ lại mật khẩu?",
+    "validation": {
+      "passwordMismatch": "Mật khẩu không khớp",
+      "tokenInvalid": "Mã đặt lại mật khẩu không hợp lệ hoặc thiếu"
+    },
+    "success": "Đặt lại mật khẩu thành công! Vui lòng đăng nhập bằng mật khẩu mới.",
+    "error": "Đặt lại mật khẩu thất bại"
   }
 }

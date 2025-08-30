@@ -27,17 +27,20 @@ export function ForgotPasswordForm({ className, ...props }: ComponentProps<"form
   const t = useTranslations("form");
   const { form, onSubmit } = useForgotPasswordHook({
     handleSubmit: async (data: TForgotPasswordSchema) => {
-      const { data: result, error } = await authClient.requestPasswordReset({
-        email: data.email,
-        redirectTo: APP_URL + RESET_PASSWORD_ROUTE,
-      });
-
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-
-      if (result) toast.success(t("forgotPassword.success"));
+      await authClient.requestPasswordReset(
+        {
+          email: data.email,
+          redirectTo: APP_URL + RESET_PASSWORD_ROUTE,
+        },
+        {
+          onSuccess: () => {
+            toast.success(t("forgotPassword.success"));
+          },
+          onError: (ctx) => {
+            toast.error(ctx.error.message);
+          },
+        },
+      );
     },
   });
 

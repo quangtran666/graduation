@@ -66,5 +66,19 @@
       "emailInvalid": "Email is invalid"
     },
     "success": "Password reset email sent successfully. Please check your email."
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "description": "Enter your new password below",
+    "password": "New password",
+    "confirmPassword": "Confirm password",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Remember your password?",
+    "validation": {
+      "passwordMismatch": "Passwords do not match",
+      "tokenInvalid": "Invalid or missing reset token"
+    },
+    "success": "Password reset successfully! Please sign in with your new password.",
+    "error": "Password reset failed"
   }
 }

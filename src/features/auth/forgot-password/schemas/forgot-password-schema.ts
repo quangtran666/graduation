@@ -6,7 +6,7 @@ export const useForgotPasswordSchema = () => {
 
   const FORGOT_PASSWORD_SCHEMA = z.object({
     email: z.email({
-      error: t("form.common.form.required", { field: t("form.common.form.name.email") }),
+      error: t("form.forgotPassword.validation.emailInvalid"),
     }),
   });
 
