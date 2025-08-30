@@ -61,6 +61,10 @@
     "description": "Enter your email below to reset your password",
     "email": "Email",
     "resetPassword": "Reset password",
-    "rememberPassword": "Remember your password?"
+    "rememberPassword": "Remember your password?",
+    "validation": {
+      "emailInvalid": "Email is invalid"
+    },
+    "success": "Password reset email sent successfully. Please check your email."
   }
 }

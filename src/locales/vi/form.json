@@ -61,6 +61,10 @@
     "description": "Nhập email bên dưới để đặt lại mật khẩu",
     "email": "Email",
     "resetPassword": "Đặt lại mật khẩu",
-    "rememberPassword": "Nhớ mật khẩu?"
+    "rememberPassword": "Nhớ mật khẩu?",
+    "validation": {
+      "emailInvalid": "Email không hợp lệ"
+    },
+    "success": "Email đặt lại mật khẩu đã được gửi thành công. Vui lòng kiểm tra email của bạn."
   }
 }

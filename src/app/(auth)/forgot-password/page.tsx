@@ -1,6 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react";
 
-import { ForgotPasswordForm } from "@/features/auth/forgot-password/forgot-password-form";
+import { ForgotPasswordForm } from "@/features/auth/forgot-password/components/forgot-password-form";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 

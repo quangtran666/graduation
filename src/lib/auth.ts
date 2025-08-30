@@ -5,6 +5,7 @@ import { username } from "better-auth/plugins";
 import { db } from "@/db";
 import * as schema from "@/db/schemas/auth";
 import { sendEmailVerification } from "./auth/email-verfication";
+import { resetPassword } from "./auth/reset-password";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -20,6 +21,7 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: false,
     requireEmailVerification: true,
+    sendResetPassword: resetPassword,
   },
   emailVerification: {
     sendOnSignUp: true,
