@@ -1,6 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react";
 
-import { LoginForm } from "@/features/auth/login/login-form";
+import { LoginForm } from "@/features/auth/login/components/login-form";
 import { ModeToggle } from "@/components/common/theme-switch";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -26,12 +26,12 @@ export default function LoginPage() {
             Acme Inc.
           </Link>
           <LanguageSwitcher />
+          <ModeToggle />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
             <LoginForm />
           </div>
-          <ModeToggle />
         </div>
       </div>
       <div className="bg-muted relative hidden lg:block">

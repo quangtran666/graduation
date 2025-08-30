@@ -2,6 +2,7 @@ import "client-only";
 import { setClientLocale } from "@/locales/utils/client";
 import { type Locale, useLocale } from "next-intl";
 import { useState } from "react";
+import { SupportedLocale } from "@/constants/locale";
 
 export function useLocaleManager() {
   const currentLocale = useLocale();
@@ -11,7 +12,7 @@ export function useLocaleManager() {
     if (newLocale === currentLocale) return;
 
     setIsChanging(true);
-    setClientLocale(newLocale); // This will trigger a page reload
+    setClientLocale(newLocale as SupportedLocale); // This will trigger a page reload
   };
 
   return {

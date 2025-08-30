@@ -1,0 +1,333 @@
+---
+globs: "src/locales/**,src/hooks/use-locale-manager.ts,src/providers/i18n-provider.tsx"
+description: "Internationalization (i18n) implementation patterns and guidelines"
+---
+
+# Internationalization (i18n) Patterns
+
+## I18n Architecture Overview
+
+This project uses a **cookie-based locale management system** without URL-based routing, as specified in user preferences. The implementation uses next-intl with custom locale utilities.
+
+### Supported Locales
+
+Configured in [src/constants/locale.ts](mdc:src/constants/locale.ts):
+
+```typescript
+export const LOCALE_CONFIG = {
+  en: { label: "English", flag: "🇺🇸", dir: "ltr" },
+  vi: { label: "Tiếng Việt", flag: "🇻🇳", dir: "ltr" },
+} as const;
+
+export const DEFAULT_LOCALE = "en";
+export const LOCALE_COOKIE_NAME = "NEXT_LOCALE";
+```
+
+## Translation Structure
+
+### Translation Files Organization
+
+```
+src/locales/
+├── en/                    # English translations
+│   ├── auth.json         # Authentication-related text
+│   ├── form.json         # Form labels and validation
+│   └── metadata.json     # Page titles and descriptions
+├── vi/                    # Vietnamese translations
+│   ├── auth.json         # Same structure as English
+│   ├── form.json
+│   └── metadata.json
+├── utils/                 # Locale utilities
+│   ├── client.ts         # Client-side locale functions
+│   └── server.ts         # Server-side locale functions
+└── request.ts            # Next-intl configuration
+```
+
+### Translation File Structure
+
+Each translation file follows a nested structure:
+
+```json
+// form.json example
+{
+  "login": {
+    "title": "Sign In",
+    "description": "Enter your credentials to access your account",
+    "email": "Email or Username",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?"
+  },
+  "common": {
+    "form": {
+      "required": "{field} is required",
+      "min": "Must be at least {length} characters",
+      "max": "Must be no more than {length} characters"
+    }
+  }
+}
+```
+
+## Next-intl Configuration
+
+### Request Configuration
+
+[src/locales/request.ts](mdc:src/locales/request.ts) handles:
+
+- **Dynamic locale detection** from cookies
+- **Message loading** for current locale
+- **Namespace organization** (form, metadata, auth)
+
+```typescript
+export default getRequestConfig(async () => {
+  const locale = await getServerLocale();
+  return {
+    locale,
+    messages: {
+      form: (await import(`../locales/${locale}/form.json`)).default,
+      metadata: (await import(`../locales/${locale}/metadata.json`)).default,
+      auth: (await import(`../locales/${locale}/auth.json`)).default,
+    },
+  };
+});
+```
+
+### Next.js Integration
+
+[next.config.ts](mdc:next.config.ts) includes next-intl plugin:
+
+```typescript
+const withNextIntl = createNextIntlPlugin("./src/locales/request.ts");
+export default withNextIntl(nextConfig);
+```
+
+## Locale Management System
+
+### Server-Side Locale Utilities
+
+[src/locales/utils/server.ts](mdc:src/locales/utils/server.ts):
+
+```typescript
+// Get current locale from cookies
+export async function getServerLocale(): Promise<SupportedLocale> {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get(LOCALE_COOKIE_NAME)?.value;
+  return SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
+}
+
+// Set locale cookie server-side
+export async function setServerLocale(locale: SupportedLocale): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(LOCALE_COOKIE_NAME, locale, {
+    expires: LOCALE_COOKIE_EXPIRES,
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+}
+```
+
+### Client-Side Locale Utilities
+
+[src/locales/utils/client.ts](mdc:src/locales/utils/client.ts):
+
+```typescript
+// Get current locale from cookies
+export function getClientLocale(): SupportedLocale {
+  const locale = Cookies.get(LOCALE_COOKIE_NAME);
+  return SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
+}
+
+// Set locale and reload page
+export function setClientLocale(locale: SupportedLocale): void {
+  Cookies.set(LOCALE_COOKIE_NAME, locale, {
+    expires: LOCALE_COOKIE_EXPIRES,
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+  window.location.reload(); // Required for server-side locale change
+}
+```
+
+## Locale Management Hook
+
+### useLocaleManager Hook
+
+[src/hooks/use-locale-manager.ts](mdc:src/hooks/use-locale-manager.ts):
+
+```typescript
+export function useLocaleManager() {
+  const currentLocale = useLocale();
+  const [isChanging, setIsChanging] = useState(false);
+
+  const changeLocale = (newLocale: Locale) => {
+    if (newLocale === currentLocale) return;
+    setIsChanging(true);
+    setClientLocale(newLocale); // Triggers page reload
+  };
+
+  return { locale: currentLocale, isChanging, changeLocale };
+}
+```
+
+## Translation Usage Patterns
+
+### In Components
+
+```typescript
+import { useTranslations } from "next-intl";
+
+export function LoginForm() {
+  const t = useTranslations("form"); // Namespace-specific translations
+
+  return (
+    <div>
+      <h1>{t("login.title")}</h1>
+      <p>{t("login.description")}</p>
+    </div>
+  );
+}
+```
+
+### In Validation Schemas
+
+```typescript
+export const useLoginSchema = () => {
+  const t = useTranslations();
+
+  return z.object({
+    email: z
+      .string()
+      .min(1, { error: t("form.common.form.required", { field: "Email" }) })
+      .email({ error: t("form.common.form.invalidEmail") }),
+  });
+};
+```
+
+### With Interpolation
+
+```typescript
+// Translation with variables
+t("form.common.form.min", { length: 6 });
+// Result: "Must be at least 6 characters"
+
+// Complex interpolation
+t("form.validation.passwordMatch", {
+  field1: t("form.common.name.password"),
+  field2: t("form.common.name.confirmPassword"),
+});
+```
+
+## Language Switcher Implementation
+
+### Language Switcher Component
+
+[src/components/common/language-switcher.tsx](mdc:src/components/common/language-switcher.tsx):
+
+- **Dropdown selection** with flags and labels
+- **Current locale highlighting**
+- **Loading state** during locale change
+- **Accessible** with proper ARIA labels
+
+```typescript
+export function LanguageSwitcher() {
+  const { locale, isChanging, changeLocale } = useLocaleManager();
+
+  return (
+    <Select value={locale} onValueChange={changeLocale}>
+      {SUPPORTED_LOCALES.map((loc) => (
+        <SelectItem key={loc} value={loc}>
+          {getLocaleFlag(loc)} {getLocaleLabel(loc)}
+        </SelectItem>
+      ))}
+    </Select>
+  );
+}
+```
+
+## Provider Setup
+
+### I18n Provider
+
+[src/providers/i18n-provider.tsx](mdc:src/providers/i18n-provider.tsx):
+
+```typescript
+import { NextIntlClientProvider } from "next-intl";
+
+export function I18nProvider({ children, messages, locale }) {
+  return (
+    <NextIntlClientProvider messages={messages} locale={locale}>
+      {children}
+    </NextIntlClientProvider>
+  );
+}
+```
+
+## Best Practices
+
+### Translation Key Naming
+
+- **Namespace structure**: `form.login.title`
+- **Descriptive keys**: Avoid generic names like `text1`
+- **Consistent nesting**: Group related translations
+- **Action-based**: `button.save`, `error.validation`
+
+### Message Organization
+
+- **Feature-based**: Group by UI sections or features
+- **Reusable common**: Extract common patterns
+- **Validation messages**: Centralize form validation text
+- **Error handling**: Consistent error message structure
+
+### Performance Considerations
+
+- **Namespace splitting**: Load only needed translations
+- **Dynamic imports**: Lazy-load translation files
+- **Cookie optimization**: Minimize cookie size
+- **Cache headers**: Proper caching for translation files
+
+### Accessibility
+
+- **RTL support**: Ready for future right-to-left languages
+- **Screen readers**: Proper ARIA labels for language switcher
+- **Focus management**: Maintain focus after locale change
+- **Language indication**: HTML lang attribute updates
+
+## Common Patterns
+
+### Form Error Messages
+
+```typescript
+// Standard validation with field name
+t("form.common.form.required", { field: t("form.common.name.email") });
+
+// Custom validation messages
+t("form.register.validation.usernameOrEmailInvalid");
+
+// Length constraints
+t("form.common.form.min", { length: 3 });
+t("form.common.form.max", { length: 20 });
+```
+
+### Success/Error Notifications
+
+```typescript
+// Success messages
+toast.success(t("form.register.success"));
+
+// Error messages with context
+toast.error(ctx.error.message || t("form.common.error.generic"));
+```
+
+### Page Metadata
+
+```typescript
+// In page components
+export async function generateMetadata() {
+  const t = await getTranslations("metadata");
+  return {
+    title: t("login.title"),
+    description: t("login.description"),
+  };
+}
+```

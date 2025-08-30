@@ -23,10 +23,18 @@
     "title": "Login to your account",
     "description": "Enter your email below to login to your account",
     "email": "Email",
+    "usernameOrEmail": "Username or email",
     "password": "Password",
     "forgotPassword": "Forgot your password?",
+    "remember": "Remember me",
     "noAccount": "Don't have an account?",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "validation": {
+      "usernameOrEmailInvalid": "Username or email is invalid",
+      "passwordRequired": "Password is required"
+    },
+    "success": "Login successful",
+    "error": "Login failed"
   },
   "register": {
     "pageTitle": "Register",
@@ -45,7 +53,7 @@
       "passwordMismatch": "Passwords do not match",
       "usernameNoSpaces": "Username cannot contain spaces"
     },
-    "success": "Account created successfully",
+    "success": "Account created successfully, please check your email to verify",
     "error": "Account creation failed"
   },
   "forgotPassword": {

@@ -23,10 +23,18 @@
     "title": "Đăng nhập vào tài khoản của bạn",
     "description": "Nhập email bên dưới để đăng nhập vào tài khoản của bạn",
     "email": "Email",
+    "usernameOrEmail": "Tên người dùng hoặc email",
     "password": "Mật khẩu",
     "forgotPassword": "Quên mật khẩu?",
+    "remember": "Luôn đăng nhập",
     "noAccount": "Không có tài khoản?",
-    "signUp": "Đăng ký"
+    "signUp": "Đăng ký",
+    "validation": {
+      "usernameOrEmailInvalid": "Tên người dùng hoặc email không hợp lệ",
+      "passwordRequired": "Mật khẩu là bắt buộc"
+    },
+    "success": "Đăng nhập thành công",
+    "error": "Đăng nhập thất bại"
   },
   "register": {
     "pageTitle": "Đăng ký",
@@ -45,7 +53,7 @@
       "passwordMismatch": "Mật khẩu không khớp",
       "usernameNoSpaces": "Tên người dùng không được chứa khoảng trắng"
     },
-    "success": "Tạo tài khoản thành công",
+    "success": "Tạo tài khoản thành công, vui lòng kiểm tra email để xác thực",
     "error": "Tạo tài khoản thất bại"
   },
   "forgotPassword": {

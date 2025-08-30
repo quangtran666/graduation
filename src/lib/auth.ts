@@ -1,8 +1,10 @@
+import "server-only";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { username } from "better-auth/plugins";
 import { db } from "@/db";
 import * as schema from "@/db/schemas/auth";
+import { sendEmailVerification } from "./auth/email-verfication";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -17,6 +19,11 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
+    requireEmailVerification: true,
+  },
+  emailVerification: {
+    sendOnSignUp: true,
+    sendVerificationEmail: sendEmailVerification,
   },
   socialProviders: {
     github: {

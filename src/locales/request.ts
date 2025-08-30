@@ -9,6 +9,7 @@ export default getRequestConfig(async () => {
     messages: {
       form: (await import(`../locales/${locale}/form.json`)).default,
       metadata: (await import(`../locales/${locale}/metadata.json`)).default,
+      auth: (await import(`../locales/${locale}/auth.json`)).default,
     },
   };
 });

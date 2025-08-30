@@ -15,16 +15,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { GithubIcon } from "@/components/icons/github";
+import { GithubIcon } from "@/components/icon/github";
 import { TRegisterSchema } from "../schemas/register-schema";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth/auth-client";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { LOGIN_ROUTE } from "@/constants/route";
 
 export function RegisterForm({ className, ...props }: ComponentProps<"form">) {
   const t = useTranslations("form");
-  const router = useRouter();
   const { form, onSubmit } = useRegisterHook({
     handleSubmit: async (data: TRegisterSchema) => {
       await authClient.signUp.email(
@@ -33,11 +32,11 @@ export function RegisterForm({ className, ...props }: ComponentProps<"form">) {
           name: data.username,
           password: data.password,
           username: data.username,
+          callbackURL: LOGIN_ROUTE,
         },
         {
           onSuccess: (_ctx) => {
             toast.success(t("register.success"));
-            router.replace("/login");
           },
           onError: (ctx) => {
             toast.error(ctx.error.message);
@@ -54,7 +53,7 @@ export function RegisterForm({ className, ...props }: ComponentProps<"form">) {
           <h1 className="text-2xl font-bold">{t("register.title")}</h1>
           <p className="text-muted-foreground text-sm text-balance">{t("register.description")}</p>
         </div>
-        <div className="grid gap-6">
+        <div className="grid gap-4">
           <FormField
             control={form.control}
             name="username"
