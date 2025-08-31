@@ -18,6 +18,9 @@
     ],
     "web/**/*.{json,css,md}": [
       "bun --cwd web run prettier:staged"
+    ],
+    "api/**/*.{cs,csproj}": [
+      "dotnet format api --include"
     ]
   }
 }
