@@ -1,0 +1,23 @@
+{
+  "name": "graduation",
+  "private": true,
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5"
+  },
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "web/**/*.{js,jsx,ts,tsx}": [
+      "bun --cwd web run lint:staged",
+      "bun --cwd web run prettier:staged"
+    ],
+    "web/**/*.{json,css,md}": [
+      "bun --cwd web run prettier:staged"
+    ]
+  }
+}
