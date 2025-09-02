@@ -1,0 +1,84 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "orContinueWith": "Or continue with",
+    "signInWith": "Login with {{provider}}",
+    "signUpWith": "Sign up with {{provider}}",
+    "backTo": "Back to {{page}}",
+    "form": {
+      "name": {
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password"
+      },
+      "required": "This {{field}} is required",
+      "min": "The field must be at least {{length}} characters long",
+      "max": "The field must be at most {{length}} characters long",
+      "emailNoAt": "{{field}} cannot be an email address"
+    }
+  },
+  "login": {
+    "pageTitle": "Login",
+    "title": "Login to your account",
+    "description": "Enter your email below to login to your account",
+    "email": "Email",
+    "usernameOrEmail": "Username or email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "remember": "Remember me",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "validation": {
+      "usernameOrEmailInvalid": "Username or email is invalid",
+      "passwordRequired": "Password is required"
+    },
+    "success": "Login successful",
+    "error": "Login failed"
+  },
+  "register": {
+    "pageTitle": "Register",
+    "title": "Create an account",
+    "description": "Enter your email below to create an account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "signUp": "Sign up",
+    "username": "Username",
+    "validation": {
+      "email": "Email is required",
+      "password": "Password is required",
+      "username": "Username is required",
+      "confirmPassword": "Confirm password is required",
+      "passwordMismatch": "Passwords do not match",
+      "usernameNoSpaces": "Username cannot contain spaces"
+    },
+    "success": "Account created successfully, please check your email to verify",
+    "error": "Account creation failed"
+  },
+  "forgotPassword": {
+    "title": "Forgot your password?",
+    "description": "Enter your email below to reset your password",
+    "email": "Email",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Remember your password?",
+    "validation": {
+      "emailInvalid": "Email is invalid"
+    },
+    "success": "Password reset email sent successfully. Please check your email."
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "description": "Enter your new password below",
+    "password": "New password",
+    "confirmPassword": "Confirm password",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Remember your password?",
+    "validation": {
+      "passwordMismatch": "Passwords do not match",
+      "tokenInvalid": "Invalid or missing reset token"
+    },
+    "success": "Password reset successfully! Please sign in with your new password.",
+    "error": "Password reset failed"
+  }
+}

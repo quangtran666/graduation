@@ -1,3 +1,6 @@
+import "@/App.css";
+import "@/lib/i18n/i18n";
+
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter, RouterProvider as TanStackRouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";

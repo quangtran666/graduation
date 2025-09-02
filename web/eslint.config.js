@@ -12,7 +12,14 @@ import pluginRouter from "@tanstack/eslint-plugin-router";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 
 export default tseslint.config([
-  globalIgnores(["dist", "node_modules", "build", "src/components/ui", "src/routeTree.gen.ts"]),
+  globalIgnores([
+    "dist",
+    "node_modules",
+    "build",
+    "src/components/ui",
+    "src/routeTree.gen.ts",
+    "src/lib/i18n/resources.ts",
+  ]),
   eslintPluginUnicorn.configs.recommended,
   eslintPluginPrettierRecommended,
   {

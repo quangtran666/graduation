@@ -5,3 +5,4 @@ node_modules/
 package-lock.json
 bun.lock
 src/routeTree.gen.ts
+src/lib/i18n/resources.d.ts
