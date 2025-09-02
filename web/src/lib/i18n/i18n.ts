@@ -13,7 +13,7 @@ i18n
     fallbackLng: "en",
     supportedLngs: ["en", "vi"],
     react: { useSuspense: true },
-    lng: "en",
+    lng: "vi",
     interpolation: {
       escapeValue: false,
     },
