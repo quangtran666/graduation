@@ -6,7 +6,8 @@
     "lint-staged": "^16.1.5"
   },
   "workspaces": [
-    "web"
+    "web",
+    "api"
   ],
   "scripts": {
     "prepare": "husky"

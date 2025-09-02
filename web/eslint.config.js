@@ -8,9 +8,11 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import eslintPluginReact from "eslint-plugin-react";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import pluginRouter from "@tanstack/eslint-plugin-router";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 export default tseslint.config([
-  globalIgnores(["dist", "node_modules", "build", "src/components/ui"]),
+  globalIgnores(["dist", "node_modules", "build", "src/components/ui", "src/routeTree.gen.ts"]),
   eslintPluginUnicorn.configs.recommended,
   eslintPluginPrettierRecommended,
   {
@@ -25,6 +27,8 @@ export default tseslint.config([
     ],
     plugins: {
       "simple-import-sort": simpleImportSort,
+      "@tanstack/react-router": pluginRouter,
+      "@tanstack/query": pluginQuery,
     },
     rules: {
       "no-unused-vars": "off",
