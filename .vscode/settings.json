@@ -12,7 +12,8 @@
   },
   "search.exclude": {
     "**/routeTree.gen.ts": true
-  }
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative"
   // "i18n-ally.localesPaths": ["src/locales"],
   // "i18n-ally.keystyle": "nested",
   // "i18n-ally.namespace": true,

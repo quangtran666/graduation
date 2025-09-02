@@ -1,8 +1,11 @@
-import "@/index.css";
-
-import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { createRouter, RouterProvider as TanStackRouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
+import { THEME_STORAGE_KEY } from "@/constants/common";
+import { TanStackQueryClientProvider } from "@/providers/react-query";
+import { ThemeProvider } from "@/providers/theme/theme-provider";
 
 import { routeTree } from "./routeTree.gen";
 
@@ -21,7 +24,12 @@ if (!rootElement.hasChildNodes()) {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <TanStackQueryClientProvider>
+        <ThemeProvider defaultTheme="system" storageKey={THEME_STORAGE_KEY}>
+          <TanStackRouterProvider router={router} />
+        </ThemeProvider>
+        <ReactQueryDevtools />
+      </TanStackQueryClientProvider>
     </StrictMode>,
   );
 }
