@@ -1,5 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
 import { Languages, Loader2 } from "lucide-react";
+import { ResultAsync } from "neverthrow";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -29,15 +30,14 @@ export function LanguageSwitch() {
     if (locale === i18n.language || isChanging) return;
 
     setIsChanging(true);
-    try {
-      await i18n.changeLanguage(locale);
-      setLocaleCookie(locale);
-      await router.invalidate();
-    } catch (error) {
-      console.error("Failed to change language:", error);
-    } finally {
-      setIsChanging(false);
-    }
+
+    const result = await ResultAsync.fromSafePromise(i18n.changeLanguage(locale))
+      .andThen(() => ResultAsync.fromSafePromise(Promise.resolve(setLocaleCookie(locale))))
+      .andThen(() => ResultAsync.fromSafePromise(router.invalidate()));
+
+    if (result.isErr()) console.error("Failed to change language:", result.error);
+
+    setIsChanging(false);
   };
 
   const currentLocale = i18n.language as SupportedLocale;
