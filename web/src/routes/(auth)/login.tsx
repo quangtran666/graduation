@@ -1,34 +1,36 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { GalleryVerticalEnd } from "lucide-react";
 
+import { LanguageSwitch } from "@/components/common/language-switch";
 import { ModeToggle } from "@/components/common/theme-switch";
 import { LoginForm } from "@/features/auth/login/components/login-form";
 
 export const Route = createFileRoute("/(auth)/login")({
-  head: () => ({
+  head: ({ match }) => ({
     meta: [
       {
-        title: "Login",
+        title: match.context.i18n?.t("metadata:login.title"),
       },
     ],
   }),
   component: RouteComponent,
-  pendingComponent: () => <div>Loading...</div>,
 });
 
 function RouteComponent() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
-        <div className="flex justify-center gap-2 md:justify-start">
+        <div className="flex justify-center gap-2 md:justify-between">
           <Link to="/login" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
             </div>
             Acme Inc.
           </Link>
-          {/* <LanguageSwitcher /> */}
-          <ModeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageSwitch />
+            <ModeToggle />
+          </div>
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
