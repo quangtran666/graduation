@@ -112,6 +112,9 @@ interface Resources {
     },
     "register": {
       "title": "Register"
+    },
+    "resetPassword": {
+      "title": "Reset Password"
     }
   }
 }

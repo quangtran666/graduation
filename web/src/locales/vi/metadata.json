@@ -7,5 +7,8 @@
   },
   "forgotPassword": {
     "title": "Quên mật khẩu"
+  },
+  "resetPassword": {
+    "title": "Đặt lại mật khẩu"
   }
 }

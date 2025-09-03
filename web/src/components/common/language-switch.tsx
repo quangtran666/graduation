@@ -1,3 +1,4 @@
+import { useRouter } from "@tanstack/react-router";
 import { Languages, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +22,7 @@ import {
 
 export function LanguageSwitch() {
   const { i18n } = useTranslation();
+  const router = useRouter();
   const [isChanging, setIsChanging] = useState(false);
 
   const changeLocale = async (locale: SupportedLocale) => {
@@ -30,6 +32,7 @@ export function LanguageSwitch() {
     try {
       await i18n.changeLanguage(locale);
       setLocaleCookie(locale);
+      await router.invalidate();
     } catch (error) {
       console.error("Failed to change language:", error);
     } finally {
@@ -58,7 +61,7 @@ export function LanguageSwitch() {
           {SUPPORTED_LOCALES.map((supportedLocale) => (
             <DropdownMenuItem
               key={supportedLocale}
-              onClick={() => changeLocale(supportedLocale)}
+              onClick={() => void changeLocale(supportedLocale)}
               className={i18n.language === supportedLocale ? "bg-accent" : ""}
               disabled={isChanging}
             >
