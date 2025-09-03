@@ -10,6 +10,8 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import pluginRouter from "@tanstack/eslint-plugin-router";
 import pluginQuery from "@tanstack/eslint-plugin-query";
+import neverthrowMustUse from "eslint-plugin-neverthrow-must-use";
+import tsParser from "@typescript-eslint/parser";
 
 export default tseslint.config([
   globalIgnores([
@@ -26,7 +28,7 @@ export default tseslint.config([
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
       eslintPluginReact.configs.flat.recommended,
       eslintPluginReact.configs.flat["jsx-runtime"],
       reactHooks.configs["recommended-latest"],
@@ -36,6 +38,7 @@ export default tseslint.config([
       "simple-import-sort": simpleImportSort,
       "@tanstack/react-router": pluginRouter,
       "@tanstack/query": pluginQuery,
+      "neverthrow-must-use": neverthrowMustUse,
     },
     rules: {
       "no-unused-vars": "off",
@@ -58,10 +61,18 @@ export default tseslint.config([
 
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+
+      "neverthrow-must-use/must-use-result": "error",
     },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parser: tsParser,
+      parserOptions: {
+        project: ["./tsconfig.json", "./tsconfig.app.json", "./tsconfig.node.json"],
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     settings: {
       react: {
