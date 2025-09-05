@@ -184,6 +184,7 @@ csharp_space_between_square_brackets = false
 # Wrapping preferences
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
+max_line_length = 80
 
 #### Naming styles ####
 [*.{cs,vb}]
@@ -378,3 +379,6 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 # SonarAnalyzer
 [*.cs]
+
+# C# Analyzer
+dotnet_diagnostic.CA1711.severity = none
