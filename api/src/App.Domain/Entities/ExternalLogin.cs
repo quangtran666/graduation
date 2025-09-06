@@ -19,5 +19,5 @@ public class ExternalLogin : IAuditable
   public DateTime? RefreshTokenExpiresAt { get; set; }
   public string? Scope { get; set; }
 
-  public User User { get; set; } = null!;
+  public virtual User User { get; set; } = null!;
 }

@@ -25,5 +25,6 @@ public class UserRoleConfiguration : BaseAuditableConfiguration<UserRole>
       .WithMany()
       .HasForeignKey(x => x.RoleId)
       .OnDelete(DeleteBehavior.Cascade);
+    builder.HasQueryFilter(x => x.User.DeletedAt == null);
   }
 }

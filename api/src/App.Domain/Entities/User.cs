@@ -15,12 +15,12 @@ public class User : IEntity
   public string PasswordHash { get; set; } = string.Empty;
   public bool EmailVerified { get; set; }
 
-  public ICollection<EmailVerificationToken> EmailVerificationTokens { get; set; } =
+  public virtual ICollection<EmailVerificationToken> EmailVerificationTokens { get; set; } =
   [];
-  public ICollection<RefreshToken> RefreshTokens { get; set; } = [];
-  public ICollection<PasswordResetToken> PasswordResetTokens { get; set; } = [];
-  public ICollection<ExternalLogin> ExternalLogins { get; set; } = [];
+  public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = [];
+  public virtual ICollection<PasswordResetToken> PasswordResetTokens { get; set; } = [];
+  public virtual ICollection<ExternalLogin> ExternalLogins { get; set; } = [];
 
-  public ICollection<UserRole> UserRoles { get; set; } = [];
-  public ICollection<UserPermission> UserPermissions { get; set; } = [];
+  public virtual ICollection<UserRole> UserRoles { get; set; } = [];
+  public virtual ICollection<UserPermission> UserPermissions { get; set; } = [];
 }

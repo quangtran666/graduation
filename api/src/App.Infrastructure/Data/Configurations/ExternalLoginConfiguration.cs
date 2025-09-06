@@ -64,5 +64,6 @@ public class ExternalLoginConfiguration
       .WithMany(x => x.ExternalLogins)
       .HasForeignKey(x => x.UserId)
       .OnDelete(DeleteBehavior.Cascade);
+    builder.HasQueryFilter(x => x.User.DeletedAt == null);
   }
 }

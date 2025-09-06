@@ -12,6 +12,6 @@ public class UserPermission : IAuditable
   public int PermissionId { get; set; }
   public bool IsGranted { get; set; } = true;
 
-  public User User { get; set; } = null!;
-  public Permission Permission { get; set; } = null!;
+  public virtual User User { get; set; } = null!;
+  public virtual Permission Permission { get; set; } = null!;
 }

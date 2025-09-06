@@ -11,6 +11,6 @@ public class RolePermission : IAuditable
   public int RoleId { get; set; }
   public int PermissionId { get; set; }
 
-  public Role Role { get; set; } = null!;
-  public Permission Permission { get; set; } = null!;
+  public virtual Role Role { get; set; } = null!;
+  public virtual Permission Permission { get; set; } = null!;
 }

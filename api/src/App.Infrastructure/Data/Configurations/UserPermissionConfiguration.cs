@@ -34,5 +34,6 @@ public class UserPermissionConfiguration
       .WithMany()
       .HasForeignKey(x => x.PermissionId)
       .OnDelete(DeleteBehavior.Cascade);
+    builder.HasQueryFilter(x => x.User.DeletedAt == null);
   }
 }

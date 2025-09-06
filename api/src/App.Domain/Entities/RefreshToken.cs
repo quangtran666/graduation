@@ -14,5 +14,5 @@ public class RefreshToken : IAuditable
   public DateTime ExpiresAt { get; set; }
   public bool IsRevoked { get; set; }
 
-  public User User { get; set; } = null!;
+  public virtual User User { get; set; } = null!;
 }

@@ -34,5 +34,6 @@ public class EmailVerificationTokenConfiguration
       .WithMany(x => x.EmailVerificationTokens)
       .HasForeignKey(x => x.UserId)
       .OnDelete(DeleteBehavior.Cascade);
+    builder.HasQueryFilter(x => x.User.DeletedAt == null);
   }
 }

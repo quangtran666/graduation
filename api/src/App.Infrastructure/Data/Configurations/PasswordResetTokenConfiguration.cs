@@ -32,5 +32,6 @@ public class PasswordResetTokenConfiguration
       .WithMany(x => x.PasswordResetTokens)
       .HasForeignKey(x => x.UserId)
       .OnDelete(DeleteBehavior.Cascade);
+    builder.HasQueryFilter(x => x.User.DeletedAt == null);
   }
 }

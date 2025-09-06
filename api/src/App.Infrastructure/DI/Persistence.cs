@@ -1,4 +1,6 @@
+using App.Application.Common.Data;
 using App.Infrastructure.Data;
+using App.Infrastructure.Data.Repositories;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,10 @@ public static class Persistence
   )
   {
     services.AddDbContext<AppDbContext>();
+    services.AddScoped<IUnitOfWork, UnitOfWork>();
+    services.AddScoped<IUserRepository, UserRepository>();
+    services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+    services.AddScoped<IEmailVerificationTokenRepository, EmailVerificationTokenRepository>();
     return services;
   }
 }
