@@ -8,6 +8,7 @@
     <PackageReference Include="ErrorOr" />
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="Hangfire.Core" />
     <PackageReference Include="Mapster" />
     <PackageReference Include="MediatR" />
   </ItemGroup>

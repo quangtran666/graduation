@@ -11,9 +11,8 @@ builder.Services.AddApplication();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
-
+app.UseInfrastructure();
 app.UseAuthorization();
-
 app.MapControllers();
 
 await app.RunAsync();

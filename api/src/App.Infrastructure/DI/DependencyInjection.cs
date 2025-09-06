@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,14 @@ public static class DependencyInjection
   {
     services.AddPersistence();
     services.AddAuthServices(configuration);
+    services.AddEmail(configuration);
+    services.AddBackgroundJobs(configuration);
     return services;
+  }
+
+  public static WebApplication UseInfrastructure(this WebApplication app)
+  {
+    app.UseBackgroundJobs();
+    return app;
   }
 }

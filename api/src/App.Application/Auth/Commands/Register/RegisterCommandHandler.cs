@@ -1,6 +1,7 @@
 
 using App.Application.Auth.Configurations;
 using App.Application.Auth.Constants;
+using App.Application.Auth.Events;
 using App.Application.Auth.Services;
 using App.Application.Common.Data;
 using App.Application.Common.Models;
@@ -19,16 +20,19 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<R
   private readonly IUnitOfWork _unitOfWork;
   private readonly IPasswordService _passwordService;
   private readonly AuthSettings _authSettings;
+  private readonly IMediator _mediator;
 
   public RegisterCommandHandler(
     IUnitOfWork unitOfWork,
     IPasswordService passwordService,
-    IOptions<AuthSettings> authSettings
+    IOptions<AuthSettings> authSettings,
+    IMediator mediator
   )
   {
     _unitOfWork = unitOfWork;
     _passwordService = passwordService;
     _authSettings = authSettings.Value;
+    _mediator = mediator;
   }
 
   public async Task<ErrorOr<RegisterResult>> Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -44,7 +48,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<R
       EmailVerified = false
     });
 
-    _unitOfWork.EmailVerificationTokens.Create(new EmailVerificationToken
+    var verificationToken = _unitOfWork.EmailVerificationTokens.Create(new EmailVerificationToken
     {
       User = createdUser,
       Token = Guid.NewGuid().ToString(),
@@ -53,6 +57,13 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<R
     });
 
     await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+    await _mediator.Publish(new UserRegisteredEvent(
+      createdUser.Id,
+      createdUser.Email,
+      createdUser.Username,
+      verificationToken.Token
+    ), cancellationToken);
 
     return new RegisterResult(
       "Registration successful. Please check your email to verify your account.",
