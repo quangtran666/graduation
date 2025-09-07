@@ -1,4 +1,5 @@
 using App.Application.Auth.Commands.Register;
+using App.Application.Auth.Commands.ResendEmailVerification;
 using App.Contract.Auth.Requests;
 using App.Contract.Auth.Responses;
 
@@ -46,6 +47,30 @@ public class AuthController : ControllerBase
       error => Problem(
         statusCode: error.Type switch
         {
+          ErrorType.Conflict => StatusCodes.Status409Conflict,
+          ErrorType.Validation => StatusCodes.Status400BadRequest,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("resend-verification")]
+  public async Task<IActionResult> ResendEmailVerification([FromBody] ResendEmailVerificationRequest request)
+  {
+    var command = new ResendEmailVerificationCommand(request.Email);
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      resendResult => Ok(new ResendEmailVerificationResponse(
+        resendResult.Message,
+        resendResult.CooldownSeconds
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.NotFound => StatusCodes.Status404NotFound,
           ErrorType.Conflict => StatusCodes.Status409Conflict,
           ErrorType.Validation => StatusCodes.Status400BadRequest,
           _ => StatusCodes.Status500InternalServerError

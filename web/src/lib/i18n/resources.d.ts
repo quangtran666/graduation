@@ -105,6 +105,20 @@ interface Resources {
         "passwordMismatch": "Passwords do not match",
         "tokenInvalid": "Invalid or missing reset token"
       }
+    },
+    "verifyEmail": {
+      "backToLogin": "Back to login",
+      "cooldown": "You can request a new verification email in {{seconds}} seconds.",
+      "description": "A verification link has been sent to your email. Please check your inbox and click the link to verify your email address.",
+      "error": {
+        "failed": "Failed to resend verification email. Please try again later.",
+        "userNotFound": "User not found",
+        "waitingPeriodOrAlreadyVerified": "Email is already verified or waiting for cooldown period"
+      },
+      "resend": "Resend verification email",
+      "resendTitle": "Didn't receive the email? Check your spam folder or try resending.",
+      "success": "Verification email resent successfully. Please check your email.",
+      "title": "Verify your email"
     }
   },
   "metadata": {

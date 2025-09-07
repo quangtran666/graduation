@@ -84,5 +84,19 @@
     },
     "success": "Password reset successfully! Please sign in with your new password.",
     "error": "Password reset failed"
+  },
+  "verifyEmail": {
+    "title": "Verify your email",
+    "description": "A verification link has been sent to your email. Please check your inbox and click the link to verify your email address.",
+    "resendTitle": "Didn't receive the email? Check your spam folder or try resending.",
+    "resend": "Resend verification email",
+    "backToLogin": "Back to login",
+    "success": "Verification email resent successfully. Please check your email.",
+    "cooldown": "Retry in {{seconds}}s.",
+    "error": {
+      "userNotFound": "User not found",
+      "waitingPeriodOrAlreadyVerified": "Email is already verified or waiting for cooldown period",
+      "failed": "Failed to resend verification email. Please try again later."
+    }
   }
 }

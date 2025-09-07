@@ -3,6 +3,11 @@ import { ModeToggle } from "@/components/common/theme-switch";
 import { VerifyEmailForm } from "@/features/auth/verify-email/components/verify-email-form";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { GalleryVerticalEnd } from "lucide-react";
+import z, { email } from "zod";
+
+const verifyEmailSearchSchema = z.object({
+  email: email(),
+});
 
 export const Route = createFileRoute("/(auth)/verify-email")({
   head: ({ match }) => ({
@@ -12,6 +17,7 @@ export const Route = createFileRoute("/(auth)/verify-email")({
       },
     ],
   }),
+  validateSearch: verifyEmailSearchSchema,
   component: RouteComponent,
 });
 

@@ -84,5 +84,19 @@
     },
     "success": "Đặt lại mật khẩu thành công! Vui lòng đăng nhập bằng mật khẩu mới.",
     "error": "Đặt lại mật khẩu thất bại"
+  },
+  "verifyEmail": {
+    "title": "Xác thực email của bạn",
+    "description": "Một liên kết xác thực đã được gửi đến email của bạn. Vui lòng kiểm tra hộp thư đến và nhấp vào liên kết để xác thực địa chỉ email của bạn.",
+    "resendTitle": "Không nhận được email? Kiểm tra thư mục spam của bạn hoặc thử gửi lại.",
+    "resend": "Gửi lại email xác thực",
+    "backToLogin": "Quay lại đăng nhập",
+    "success": "Gửi lại email xác thực thành công. Vui lòng kiểm tra email của bạn.",
+    "cooldown": "Yêu cầu lại sau {{seconds}} giây.",
+    "error": {
+      "userNotFound": "Không tìm thấy người dùng",
+      "waitingPeriodOrAlreadyVerified": "Email đã được xác thực hoặc đang trong thời gian chờ",
+      "failed": "Gửi lại email xác thực thất bại. Vui lòng thử lại sau."
+    }
   }
 }

@@ -1,0 +1,26 @@
+import { Button } from "@/components/ui/button";
+import { useResendVerificationHook } from "@/features/auth/verify-email/hooks/resend-verification-hook";
+import { useTranslation } from "react-i18next";
+
+interface ResendButtonProps {
+  email: string;
+}
+
+export function ResendButton({ email }: ResendButtonProps) {
+  const { t } = useTranslation("form");
+  const { handleResend, isLoading, isOnCooldown, cooldownSeconds } =
+    useResendVerificationHook(email);
+
+  return (
+    <Button
+      variant="outline"
+      className="w-full bg-transparent"
+      onClick={handleResend}
+      disabled={isLoading || isOnCooldown}
+    >
+      {isOnCooldown
+        ? t("verifyEmail.cooldown", { seconds: cooldownSeconds })
+        : t("verifyEmail.resend")}
+    </Button>
+  );
+}
