@@ -1,3 +1,5 @@
+using App.Infrastructure.DI;
+
 namespace App.Api.DI;
 
 public static class DependencyInjection
@@ -6,6 +8,17 @@ public static class DependencyInjection
   {
     services.AddConfiguration(configuration);
     services.AddControllers();
+    services.AddCorsPolicy(configuration);
     return services;
+  }
+
+  public static WebApplication UseApi(this WebApplication app)
+  {
+    app.UseHttpsRedirection();
+    app.UseCorsPolicy();
+    app.UseInfrastructure();
+    app.UseAuthorization();
+    app.MapControllers();
+    return app;
   }
 }

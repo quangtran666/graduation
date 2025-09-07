@@ -10,5 +10,8 @@
   },
   "resetPassword": {
     "title": "Đặt lại mật khẩu"
+  },
+  "verifyEmail": {
+    "title": "Xác minh email"
   }
 }

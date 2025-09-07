@@ -11,7 +11,7 @@ export const useRegisterSchema = () => {
       username: z
         .string()
         .min(3, { error: t("common.form.min", { length: 3 }) })
-        .max(20, { error: t("common.form.max", { length: 20 }) })
+        .max(50, { error: t("common.form.max", { length: 50 }) })
         .refine((v) => !NO_SPACES_REGEX.test(v), {
           error: t("register.validation.usernameNoSpaces"),
         })

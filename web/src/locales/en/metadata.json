@@ -10,5 +10,8 @@
   },
   "resetPassword": {
     "title": "Reset Password"
+  },
+  "verifyEmail": {
+    "title": "Verify Email"
   }
 }

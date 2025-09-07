@@ -72,7 +72,11 @@ interface Resources {
       "confirmPassword": "Confirm password",
       "description": "Enter your email below to create an account",
       "email": "Email",
-      "error": "Account creation failed",
+      "error": {
+        "failed": "Registration failed. Please try again.",
+        "invalidInput": "Please check your input",
+        "userExists": "User already exists"
+      },
       "pageTitle": "Register",
       "password": "Password",
       "signUp": "Sign up",
@@ -115,6 +119,9 @@ interface Resources {
     },
     "resetPassword": {
       "title": "Reset Password"
+    },
+    "verifyEmail": {
+      "title": "Verify Email"
     }
   }
 }

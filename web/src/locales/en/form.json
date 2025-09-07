@@ -54,7 +54,11 @@
       "usernameNoSpaces": "Username cannot contain spaces"
     },
     "success": "Account created successfully, please check your email to verify",
-    "error": "Account creation failed"
+    "error": {
+      "userExists": "User already exists",
+      "invalidInput": "Please check your input",
+      "failed": "Registration failed. Please try again."
+    }
   },
   "forgotPassword": {
     "title": "Forgot your password?",

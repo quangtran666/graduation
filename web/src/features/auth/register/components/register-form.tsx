@@ -20,9 +20,7 @@ import { useRegisterHook } from "../hooks/register-hook";
 
 export function RegisterForm({ className, ...properties }: ComponentProps<"form">) {
   const { t } = useTranslation("form");
-  const { form, onSubmit } = useRegisterHook({
-    handleSubmit: () => void Promise.resolve(),
-  });
+  const { form, onSubmit, isLoading } = useRegisterHook();
 
   return (
     <Form {...form}>
@@ -85,11 +83,7 @@ export function RegisterForm({ className, ...properties }: ComponentProps<"form"
             )}
           />
           <Button type="submit" className="w-full">
-            {form.formState.isSubmitting ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              t("register.signUp")
-            )}
+            {isLoading ? <Loader2 className="animate-spin" /> : t("register.signUp")}
           </Button>
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
             <span className="bg-background text-muted-foreground relative z-10 px-2">
