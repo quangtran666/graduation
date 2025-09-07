@@ -2,8 +2,6 @@
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-
 #nullable disable
 
 namespace App.Infrastructure.Data.Migrations
@@ -18,16 +16,16 @@ namespace App.Infrastructure.Data.Migrations
           name: "nguoi_dung",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ngay_xoa = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            nguoi_xoa = table.Column<int>(type: "integer", nullable: true),
-            ten_dang_nhap = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-            email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-            mat_khau_hash = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-            email_da_xac_thuc = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ngay_xoa = table.Column<DateTime>(type: "datetime2", nullable: true),
+            nguoi_xoa = table.Column<int>(type: "int", nullable: true),
+            ten_dang_nhap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+            email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+            mat_khau_hash = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+            email_da_xac_thuc = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
           },
           constraints: table =>
           {
@@ -38,14 +36,14 @@ namespace App.Infrastructure.Data.Migrations
           name: "quyen",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ten = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-            ten_hien_thi = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-            mo_ta = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-            danh_muc = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ten = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+            ten_hien_thi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+            mo_ta = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+            danh_muc = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
           },
           constraints: table =>
           {
@@ -56,14 +54,14 @@ namespace App.Infrastructure.Data.Migrations
           name: "vai_tro",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ten = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-            ten_hien_thi = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-            mo_ta = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-            la_mac_dinh = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ten = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+            ten_hien_thi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+            mo_ta = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+            la_mac_dinh = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
           },
           constraints: table =>
           {
@@ -74,20 +72,20 @@ namespace App.Infrastructure.Data.Migrations
           name: "dang_nhap_ngoai",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_nguoi_dung = table.Column<int>(type: "integer", nullable: false),
-            nha_cung_cap = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-            ma_ngoai = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-            email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-            ten_hien_thi = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-            token_truy_cap = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
-            token_lam_moi = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
-            het_han_luc_token_truy_cap = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            het_han_luc_token_lam_moi = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            pham_vi = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_nguoi_dung = table.Column<int>(type: "int", nullable: false),
+            nha_cung_cap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+            ma_ngoai = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+            email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+            ten_hien_thi = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+            token_truy_cap = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+            token_lam_moi = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+            het_han_luc_token_truy_cap = table.Column<DateTime>(type: "datetime2", nullable: true),
+            het_han_luc_token_lam_moi = table.Column<DateTime>(type: "datetime2", nullable: true),
+            pham_vi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
           },
           constraints: table =>
           {
@@ -104,14 +102,14 @@ namespace App.Infrastructure.Data.Migrations
           name: "token_dat_lai_mat_khau",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_nguoi_dung = table.Column<int>(type: "integer", nullable: false),
-            token = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-            het_han_luc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            su_dung_luc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_nguoi_dung = table.Column<int>(type: "int", nullable: false),
+            token = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+            het_han_luc = table.Column<DateTime>(type: "datetime2", nullable: false),
+            su_dung_luc = table.Column<DateTime>(type: "datetime2", nullable: true)
           },
           constraints: table =>
           {
@@ -128,14 +126,14 @@ namespace App.Infrastructure.Data.Migrations
           name: "token_lam_moi",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_nguoi_dung = table.Column<int>(type: "integer", nullable: false),
-            token = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-            het_han_luc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            da_thu_hoi = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_nguoi_dung = table.Column<int>(type: "int", nullable: false),
+            token = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+            het_han_luc = table.Column<DateTime>(type: "datetime2", nullable: false),
+            da_thu_hoi = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
           },
           constraints: table =>
           {
@@ -152,14 +150,14 @@ namespace App.Infrastructure.Data.Migrations
           name: "token_xac_thuc_email",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_nguoi_dung = table.Column<int>(type: "integer", nullable: false),
-            token = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-            het_han_luc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            su_dung_luc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_nguoi_dung = table.Column<int>(type: "int", nullable: false),
+            token = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+            het_han_luc = table.Column<DateTime>(type: "datetime2", nullable: false),
+            su_dung_luc = table.Column<DateTime>(type: "datetime2", nullable: true)
           },
           constraints: table =>
           {
@@ -176,13 +174,13 @@ namespace App.Infrastructure.Data.Migrations
           name: "nguoi_dung_quyen",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_nguoi_dung = table.Column<int>(type: "integer", nullable: false),
-            ma_quyen = table.Column<int>(type: "integer", nullable: false),
-            duoc_cap_phep = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_nguoi_dung = table.Column<int>(type: "int", nullable: false),
+            ma_quyen = table.Column<int>(type: "int", nullable: false),
+            duoc_cap_phep = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
           },
           constraints: table =>
           {
@@ -205,12 +203,12 @@ namespace App.Infrastructure.Data.Migrations
           name: "nguoi_dung_vai_tro",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_nguoi_dung = table.Column<int>(type: "integer", nullable: false),
-            ma_vai_tro = table.Column<int>(type: "integer", nullable: false)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_nguoi_dung = table.Column<int>(type: "int", nullable: false),
+            ma_vai_tro = table.Column<int>(type: "int", nullable: false)
           },
           constraints: table =>
           {
@@ -233,12 +231,12 @@ namespace App.Infrastructure.Data.Migrations
           name: "vai_tro_quyen",
           columns: table => new
           {
-            id = table.Column<int>(type: "integer", nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-            ngay_tao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-            ngay_cap_nhat = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-            ma_vai_tro = table.Column<int>(type: "integer", nullable: false),
-            ma_quyen = table.Column<int>(type: "integer", nullable: false)
+            id = table.Column<int>(type: "int", nullable: false)
+                  .Annotation("SqlServer:Identity", "1, 1"),
+            ngay_tao = table.Column<DateTime>(type: "datetime2", nullable: false),
+            ngay_cap_nhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+            ma_vai_tro = table.Column<int>(type: "int", nullable: false),
+            ma_quyen = table.Column<int>(type: "int", nullable: false)
           },
           constraints: table =>
           {

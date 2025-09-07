@@ -38,7 +38,7 @@ public class AppDbContext : DbContext
     var connectionString = _configuration.GetConnectionString(
       "DefaultConnection"
     );
-    optionsBuilder.UseNpgsql(
+    optionsBuilder.UseSqlServer(
       connectionString,
       options =>
         options.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)

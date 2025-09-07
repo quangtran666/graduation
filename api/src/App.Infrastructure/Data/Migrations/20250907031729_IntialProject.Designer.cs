@@ -3,16 +3,16 @@ using System;
 using App.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace App.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250905073452_IntialProject")]
+    [Migration("20250907031729_IntialProject")]
     partial class IntialProject
     {
         /// <inheritdoc />
@@ -24,43 +24,43 @@ namespace App.Infrastructure.Data.Migrations
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("App.Domain.Entities.EmailVerificationToken", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("het_han_luc");
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("token");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<DateTime?>("UsedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("su_dung_luc");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_nguoi_dung");
 
                     b.HasKey("Id");
@@ -74,66 +74,66 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AccessToken")
                         .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)")
+                        .HasColumnType("nvarchar(1000)")
                         .HasColumnName("token_truy_cap");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("ten_hien_thi");
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("email");
 
                     b.Property<string>("ExternalId")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("ma_ngoai");
 
                     b.Property<string>("Provider")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("nha_cung_cap");
 
                     b.Property<string>("RefreshToken")
                         .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)")
+                        .HasColumnType("nvarchar(1000)")
                         .HasColumnName("token_lam_moi");
 
                     b.Property<DateTime?>("RefreshTokenExpiresAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("het_han_luc_token_lam_moi");
 
                     b.Property<string>("Scope")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasColumnType("nvarchar(200)")
                         .HasColumnName("pham_vi");
 
                     b.Property<DateTime?>("TokenExpiresAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("het_han_luc_token_truy_cap");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_nguoi_dung");
 
                     b.HasKey("Id");
@@ -147,35 +147,35 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("het_han_luc");
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("token");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<DateTime?>("UsedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("su_dung_luc");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_nguoi_dung");
 
                     b.HasKey("Id");
@@ -189,40 +189,40 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("danh_muc");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("mo_ta");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("ten_hien_thi");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("ten");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.HasKey("Id");
@@ -234,37 +234,37 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("het_han_luc");
 
                     b.Property<bool>("IsRevoked")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("da_thu_hoi");
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("token");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_nguoi_dung");
 
                     b.HasKey("Id");
@@ -278,40 +278,40 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("mo_ta");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("ten_hien_thi");
 
                     b.Property<bool>("IsDefault")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("la_mac_dinh");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("ten");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.HasKey("Id");
@@ -323,25 +323,25 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<int>("PermissionId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_quyen");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_vai_tro");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.HasKey("Id");
@@ -357,49 +357,49 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_xoa");
 
                     b.Property<int?>("DeletedBy")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("nguoi_xoa");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("email");
 
                     b.Property<bool>("EmailVerified")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("email_da_xac_thuc");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("mat_khau_hash");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("ten_dang_nhap");
 
                     b.HasKey("Id");
@@ -411,31 +411,31 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<bool>("IsGranted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(true)
                         .HasColumnName("duoc_cap_phep");
 
                     b.Property<int>("PermissionId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_quyen");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_nguoi_dung");
 
                     b.HasKey("Id");
@@ -451,25 +451,25 @@ namespace App.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_tao");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_vai_tro");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ngay_cap_nhat");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ma_nguoi_dung");
 
                     b.HasKey("Id");
