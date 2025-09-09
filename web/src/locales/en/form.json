@@ -1,6 +1,8 @@
 {
   "common": {
     "signIn": "Sign in",
+    "continueWith": "Continue with {{action}}",
+    "gotohome": "Go to homepage",
     "orContinueWith": "Or continue with",
     "signInWith": "Login with {{provider}}",
     "signUpWith": "Sign up with {{provider}}",
@@ -97,6 +99,23 @@
       "userNotFound": "User not found",
       "waitingPeriodOrAlreadyVerified": "Email is already verified or waiting for cooldown period",
       "failed": "Failed to resend verification email. Please try again later."
+    }
+  },
+  "emailConfirm": {
+    "title": "Email verified",
+    "description": "Your email has been successfully verified. You can now access all features of your account.",
+    "verifying": {
+      "title": "Verifying Your Email",
+      "description": "Please wait while we verify your email address..."
+    },
+    "success": {
+      "title": "Email Verified Successfully!",
+      "description": "Your email has been verified. You can now sign in to your account."
+    },
+    "error": {
+      "title": "Verification Failed",
+      "description": "We couldn't verify your email. The link may be expired or invalid.",
+      "failed": "Email verification failed. The verification link may be invalid or expired."
     }
   }
 }

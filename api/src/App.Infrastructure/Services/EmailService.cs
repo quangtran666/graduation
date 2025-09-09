@@ -41,7 +41,7 @@ public partial class EmailService : IEmailService
   {
     try
     {
-      var verificationUrl = $"{_emailSettings.BaseUrl}/verfiy-email?token={model.VerificationToken}";
+      var verificationUrl = $"{_emailSettings.BaseUrl}/email-confirmed?token={model.VerificationToken}";
 
       var result = await _fluentEmail
         .To(model.Email, model.Username)

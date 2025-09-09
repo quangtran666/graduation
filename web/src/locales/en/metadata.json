@@ -13,5 +13,8 @@
   },
   "verifyEmail": {
     "title": "Verify Email"
+  },
+  "emailConfirmed": {
+    "title": "Email Confirmed"
   }
 }

@@ -1,6 +1,8 @@
 {
   "common": {
     "signIn": "Đăng nhập",
+    "continueWith": "Tiếp tục với {{action}}",
+    "gotohome": "Trở về trang chủ",
     "orContinueWith": "Hoặc tiếp tục với",
     "signInWith": "Đăng nhập với {{provider}}",
     "signUpWith": "Đăng ký với {{provider}}",
@@ -97,6 +99,23 @@
       "userNotFound": "Không tìm thấy người dùng",
       "waitingPeriodOrAlreadyVerified": "Email đã được xác thực hoặc đang trong thời gian chờ",
       "failed": "Gửi lại email xác thực thất bại. Vui lòng thử lại sau."
+    }
+  },
+  "emailConfirm": {
+    "title": "Email đã được xác minh",
+    "description": "Email của bạn đã được xác minh thành công. Bây giờ bạn có thể truy cập tất cả các tính năng của tài khoản.",
+    "verifying": {
+      "title": "Đang xác minh email của bạn",
+      "description": "Vui lòng chờ trong khi chúng tôi xác minh địa chỉ email của bạn..."
+    },
+    "success": {
+      "title": "Xác minh email thành công!",
+      "description": "Email của bạn đã được xác minh. Bây giờ bạn có thể đăng nhập vào tài khoản của mình."
+    },
+    "error": {
+      "title": "Xác minh thất bại",
+      "description": "Chúng tôi không thể xác minh email của bạn. Liên kết có thể đã hết hạn hoặc không hợp lệ.",
+      "failed": "Xác minh email thất bại. Liên kết xác minh có thể không hợp lệ hoặc đã hết hạn."
     }
   }
 }

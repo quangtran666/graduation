@@ -380,6 +380,11 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 # SonarAnalyzer
 [*.cs]
 
+# Omnisharp
+dotnet_diagnostic.IDE0008.severity = none
+
 # C# Analyzer
 dotnet_diagnostic.CA1711.severity = none
 dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.IDE0058.severity = none
+dotnet_diagnostic.IDE0011.severity = none

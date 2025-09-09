@@ -13,5 +13,8 @@
   },
   "verifyEmail": {
     "title": "Xác minh email"
+  },
+  "emailConfirmed": {
+    "title": "Email đã được xác nhận"
   }
 }

@@ -1,5 +1,6 @@
 using App.Application.Auth.Commands.Register;
 using App.Application.Auth.Commands.ResendEmailVerification;
+using App.Application.Auth.Commands.VerifyEmail;
 using App.Contract.Auth.Requests;
 using App.Contract.Auth.Responses;
 
@@ -77,6 +78,35 @@ public class AuthController : ControllerBase
         },
         title: error.Description
       )
+    );
+  }
+
+  [HttpPost("verify-email")]
+  public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+  {
+    var command = new VerifyEmailCommand(token);
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+        verifyResult => Ok(new VerifyEmailResponse(
+          verifyResult.Message,
+          new UserInfo(
+            verifyResult.User.Id,
+            verifyResult.User.Username,
+            verifyResult.User.Email,
+            verifyResult.User.EmailVerified
+          )
+        )),
+        error => Problem(
+          statusCode: error.Type switch
+          {
+            ErrorType.NotFound => StatusCodes.Status404NotFound,
+            ErrorType.Conflict => StatusCodes.Status409Conflict,
+            ErrorType.Validation => StatusCodes.Status400BadRequest,
+            _ => StatusCodes.Status500InternalServerError
+          },
+          title: error.Description
+        )
     );
   }
 }

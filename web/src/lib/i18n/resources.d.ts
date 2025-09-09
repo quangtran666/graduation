@@ -22,6 +22,7 @@ interface Resources {
   "form": {
     "common": {
       "backTo": "Back to {{page}}",
+      "continueWith": "Continue with {{action}}",
       "form": {
         "emailNoAt": "{{field}} cannot be an email address",
         "max": "The field must be at most {{length}} characters long",
@@ -34,10 +35,28 @@ interface Resources {
         },
         "required": "This {{field}} is required"
       },
+      "gotohome": "Go to homepage",
       "orContinueWith": "Or continue with",
       "signIn": "Sign in",
       "signInWith": "Login with {{provider}}",
       "signUpWith": "Sign up with {{provider}}"
+    },
+    "emailConfirm": {
+      "description": "Your email has been successfully verified. You can now access all features of your account.",
+      "error": {
+        "description": "We couldn't verify your email. The link may be expired or invalid.",
+        "failed": "Email verification failed. The verification link may be invalid or expired.",
+        "title": "Verification Failed"
+      },
+      "success": {
+        "description": "Your email has been verified. You can now sign in to your account.",
+        "title": "Email Verified Successfully!"
+      },
+      "title": "Email verified",
+      "verifying": {
+        "description": "Please wait while we verify your email address...",
+        "title": "Verifying Your Email"
+      }
     },
     "forgotPassword": {
       "description": "Enter your email below to reset your password",
@@ -108,7 +127,7 @@ interface Resources {
     },
     "verifyEmail": {
       "backToLogin": "Back to login",
-      "cooldown": "You can request a new verification email in {{seconds}} seconds.",
+      "cooldown": "Retry in {{seconds}}s.",
       "description": "A verification link has been sent to your email. Please check your inbox and click the link to verify your email address.",
       "error": {
         "failed": "Failed to resend verification email. Please try again later.",
@@ -122,6 +141,9 @@ interface Resources {
     }
   },
   "metadata": {
+    "emailConfirmed": {
+      "title": "Email Confirmed"
+    },
     "forgotPassword": {
       "title": "Forgot Password"
     },

@@ -17,5 +17,8 @@ public static class AuthErrors
   public static class EmailVerification
   {
     public const string COOLDOWN_ACTIVE = "EmailVerification.CooldownActive";
+    public const string TOKEN_NOT_FOUND = "EmailVerification.TokenNotFound";
+    public const string TOKEN_EXPIRED = "EmailVerification.TokenExpired";
+    public const string TOKEN_ALREADY_USED = "EmailVerification.TokenAlreadyUsed";
   }
 }

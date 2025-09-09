@@ -5,8 +5,6 @@ using App.Application.Common.Configurations;
 using App.Application.Common.Services;
 using App.Infrastructure.Services;
 
-using FluentEmail.Core;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
