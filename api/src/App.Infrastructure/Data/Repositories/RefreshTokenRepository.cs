@@ -2,6 +2,8 @@
 using App.Application.Common.Data;
 using App.Domain.Entities;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace App.Infrastructure.Data.Repositories;
 
 public class RefreshTokenRepository : IRefreshTokenRepository
@@ -11,6 +13,13 @@ public class RefreshTokenRepository : IRefreshTokenRepository
   public RefreshTokenRepository(AppDbContext context)
   {
     _context = context;
+  }
+
+  public async Task<RefreshToken?> GetByTokenAsync(string token)
+  {
+    return await _context.RefreshTokens
+      .Include(x => x.User)
+      .FirstOrDefaultAsync(x => x.Token == token);
   }
 
   public RefreshToken Create(RefreshToken refreshToken)

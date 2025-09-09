@@ -17,7 +17,10 @@ public static class DependencyInjection
     app.UseHttpsRedirection();
     app.UseCorsPolicy();
     app.UseInfrastructure();
+
+    app.UseAuthentication(); // Add this before UseAuthorization
     app.UseAuthorization();
+
     app.MapControllers();
     return app;
   }

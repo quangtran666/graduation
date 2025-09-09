@@ -1,3 +1,6 @@
+using App.Application.Auth.Commands.Login;
+using App.Application.Auth.Commands.Logout;
+using App.Application.Auth.Commands.RefreshTokens;
 using App.Application.Auth.Commands.Register;
 using App.Application.Auth.Commands.ResendEmailVerification;
 using App.Application.Auth.Commands.VerifyEmail;
@@ -52,6 +55,81 @@ public class AuthController : ControllerBase
           ErrorType.Validation => StatusCodes.Status400BadRequest,
           _ => StatusCodes.Status500InternalServerError
         },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("login")]
+  public async Task<IActionResult> Login([FromBody] LoginRequest request)
+  {
+    var command = new LoginCommand(
+      request.UsernameOrEmail,
+      request.Password,
+      request.RememberMe
+    );
+
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      loginResult => Ok(new LoginResponse(
+        loginResult.Message,
+        loginResult.AccessToken,
+        loginResult.RefreshToken,
+        new UserInfo(
+          loginResult.User.Id,
+          loginResult.User.Username,
+          loginResult.User.Email,
+          loginResult.User.EmailVerified
+        ),
+        loginResult.IsRememberMe // Truyền thông tin remember me cho frontend
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.NotFound => StatusCodes.Status401Unauthorized,
+          ErrorType.Validation => StatusCodes.Status401Unauthorized,
+          ErrorType.Forbidden => StatusCodes.Status403Forbidden,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("refresh")]
+  public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+  {
+    var command = new RefreshTokenCommand(request.RefreshToken);
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      refreshResult => Ok(new RefreshTokenResponse(
+        refreshResult.AccessToken,
+        refreshResult.RefreshToken
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.Validation => StatusCodes.Status401Unauthorized,
+          ErrorType.Forbidden => StatusCodes.Status403Forbidden,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("logout")]
+  public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
+  {
+    var command = new LogoutCommand(request.RefreshToken);
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      message => Ok(new LogoutResponse(message)),
+      error => Problem(
+        statusCode: StatusCodes.Status500InternalServerError,
         title: error.Description
       )
     );

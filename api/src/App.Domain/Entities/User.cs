@@ -1,4 +1,5 @@
 using App.Domain.Common;
+using App.Domain.Enums;
 
 namespace App.Domain.Entities;
 
@@ -14,6 +15,12 @@ public class User : IEntity
   public string Email { get; set; } = string.Empty;
   public string PasswordHash { get; set; } = string.Empty;
   public bool EmailVerified { get; set; }
+
+  public UserStatus Status { get; set; } = UserStatus.Active;
+  public int TokenVersion { get; set; } = 1;
+  public DateTime? SuspendedUntil { get; set; }
+  public string? SuspensionReason { get; set; }
+  public int? SuspendedBy { get; set; }
 
   public virtual ICollection<EmailVerificationToken> EmailVerificationTokens { get; set; } =
   [];

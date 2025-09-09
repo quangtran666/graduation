@@ -10,4 +10,5 @@ public interface ITokenService
   string GenerateRefreshToken();
   ErrorOr<bool> ValidateAccessToken(string token);
   ErrorOr<int?> GetUserIdFromAccessToken(string token);
+  ErrorOr<int?> GetTokenVersionFromAccessToken(string token);
 }

@@ -32,6 +32,7 @@ public class TokenService : ITokenService
       new Claim(JwtRegisteredClaimNames.Email, user.Email),
       new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
       new Claim(CustomClaimTypes.USERNAME, user.Username),
+      new Claim(CustomClaimTypes.TOKEN_VERSION, user.TokenVersion.ToString(CultureInfo.InvariantCulture)),
     };
 
     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
@@ -75,16 +76,41 @@ public class TokenService : ITokenService
 
   public ErrorOr<int?> GetUserIdFromAccessToken(string token)
   {
-    var tokenHandler = new JwtSecurityTokenHandler();
-    var jsonToken = tokenHandler.ReadJwtToken(token);
-
-    var userIdClaim = jsonToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
-
-    if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+    try
     {
-      return Error.Validation(AuthErrors.Token.INVALID_USER_ID, "Invalid user ID in token");
-    }
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var jsonToken = tokenHandler.ReadJwtToken(token);
 
-    return userId;
+      var userIdClaim = jsonToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
+
+      if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+        return Error.Validation(AuthErrors.Token.INVALID_USER_ID, "Invalid user ID in token");
+
+      return userId;
+    }
+    catch
+    {
+      return Error.Validation(AuthErrors.Token.INVALID_TOKEN, "Invalid token format");
+    }
+  }
+
+  public ErrorOr<int?> GetTokenVersionFromAccessToken(string token)
+  {
+    try
+    {
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var jsonToken = tokenHandler.ReadJwtToken(token);
+
+      var tokenVersionClaim = jsonToken.Claims.FirstOrDefault(x => x.Type == CustomClaimTypes.TOKEN_VERSION)?.Value;
+
+      if (tokenVersionClaim == null || !int.TryParse(tokenVersionClaim, out var tokenVersion))
+        return Error.Validation(AuthErrors.Token.INVALID_TOKEN, "Invalid token version in token");
+
+      return tokenVersion;
+    }
+    catch
+    {
+      return Error.Validation(AuthErrors.Token.INVALID_TOKEN, "Invalid token format");
+    }
   }
 }

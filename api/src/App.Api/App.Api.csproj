@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-  
+
   <PropertyGroup>
     <PreserveCompilationContext Condition="'$(Configuration)' == 'Debug'">true</PreserveCompilationContext>
   </PropertyGroup>
