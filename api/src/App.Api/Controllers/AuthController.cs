@@ -4,6 +4,7 @@ using App.Application.Auth.Commands.RefreshTokens;
 using App.Application.Auth.Commands.Register;
 using App.Application.Auth.Commands.ResendEmailVerification;
 using App.Application.Auth.Commands.VerifyEmail;
+using App.Application.Auth.Constants;
 using App.Contract.Auth.Requests;
 using App.Contract.Auth.Responses;
 
@@ -84,16 +85,22 @@ public class AuthController : ControllerBase
         ),
         loginResult.IsRememberMe // Truyền thông tin remember me cho frontend
       )),
-      error => Problem(
-        statusCode: error.Type switch
-        {
-          ErrorType.NotFound => StatusCodes.Status401Unauthorized,
-          ErrorType.Validation => StatusCodes.Status401Unauthorized,
-          ErrorType.Forbidden => StatusCodes.Status403Forbidden,
-          _ => StatusCodes.Status500InternalServerError
-        },
-        title: error.Description
-      )
+      error => error.Code == AuthErrors.User.EMAIL_NOT_VERIFIED_RESENT
+        ? Problem(
+            statusCode: StatusCodes.Status403Forbidden,
+            title: error.Description,
+            detail: AuthConstants.ResponseDetails.EMAIL_NOT_VERIFIED_RESENT // Sử dụng constant thay vì magic string
+          )
+        : Problem(
+            statusCode: error.Type switch
+            {
+              ErrorType.NotFound => StatusCodes.Status401Unauthorized,
+              ErrorType.Validation => StatusCodes.Status401Unauthorized,
+              ErrorType.Forbidden => StatusCodes.Status403Forbidden,
+              _ => StatusCodes.Status500InternalServerError
+            },
+            title: error.Description
+          )
     );
   }
 

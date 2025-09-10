@@ -1,17 +1,44 @@
-# Agent mode
-
-# Coding Standards
+### Things to do
 
 - For single-line if statements, omit curly braces `{}`
 - When implementing EF Core repositories for mutations, avoid using `async/await` and `SaveChangesAsync`. Instead, consolidate all changes at the UnitOfWork level to call `SaveChangesAsync` once or use transactions
 - Using Options Pattern in ASP.NET Core when possible
-- Using erroror package for result pattern implementation, never throw exceptions for flow control
+- Using ErrorOr package for result pattern implementation, never throw exceptions for flow control
 - Never using magic string, number, find relative files for constants or if not exist, create a new one
-- Không sử dụng fully qualified name, thay vào đó sử dụng qualified namespace
+- Do not use fully qualified name, instead use qualified namespace
 
-# Project Information
+### Things to avoid
 
-## Backend
+### Safety and permissions
+
+Allowed without prompt:
+
+- read files, list files
+- write files, create files
+
+Ask first:
+
+- package installs,
+- git push
+- deleting files, chmod
+- running full build
+
+### Good and bad examples
+
+- Never write bussiness logic in controller, instead handle in application layer
+
+### When stuck
+
+- ask a clarifying question, propose a short plan
+- do not make up answers, say "I don't know" if you don't know
+
+### Project Information
+
+#### Project Hint
+
+- See `api/src/App.Domain/Entities` for domain entities
+
+#### Backend
 
 - Follows **Clean Architecture** principles
 - **API Layer**: Contains controllers, middleware, and web API configurations
@@ -21,7 +48,7 @@
 - **Contract Layer**: Defines DTOs and response models
 - Uses `Directory.Build.props` and `Directory.Packages.props` for centralized package version and configuration management across solution projects
 
-### Technology Stack
+##### Technology Stack
 
 - **Database**: SQL Server, Redis
 - **ORM**: Entity Framework Core
@@ -31,7 +58,7 @@
 - **Email Service**: FluentEmail
 - **Error Handling**: ErrorOr for result pattern implementation
 
-## Frontend
+### Frontend
 
 - Built with **React 19** and **Vite**
 - **Routing**: TanStack Router

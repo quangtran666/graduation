@@ -16,16 +16,19 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<LoginRe
   private readonly IUnitOfWork _unitOfWork;
   private readonly IPasswordService _passwordService;
   private readonly ITokenService _tokenService;
+  private readonly IEmailVerificationService _emailVerificationService;
 
   public LoginCommandHandler(
     IUnitOfWork unitOfWork,
     IPasswordService passwordService,
-    ITokenService tokenService
+    ITokenService tokenService,
+    IEmailVerificationService emailVerificationService
   )
   {
     _unitOfWork = unitOfWork;
     _passwordService = passwordService;
     _tokenService = tokenService;
+    _emailVerificationService = emailVerificationService;
   }
 
   public async Task<ErrorOr<LoginResult>> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -38,7 +41,12 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<LoginRe
       return Error.Validation(AuthErrors.User.INVALID_CREDENTIALS, "Invalid credentials");
 
     if (!user.EmailVerified)
-      return Error.Forbidden(AuthErrors.User.EMAIL_NOT_VERIFIED, "Please verify your email first");
+    {
+      await _emailVerificationService.SendVerificationEmailAsync(user, cancellationToken);
+
+      return Error.Forbidden(AuthErrors.User.EMAIL_NOT_VERIFIED_RESENT,
+        "Please verify your email first. A new verification email has been sent if you haven't received one recently.");
+    }
 
     if (user.Status == UserStatus.Banned)
       return Error.Forbidden(AuthErrors.User.ACCOUNT_BANNED, "Account has been permanently banned");

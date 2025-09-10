@@ -8,6 +8,7 @@ public static class AuthErrors
     public const string ALREADY_EXISTS = "User.AlreadyExists";
     public const string NOT_FOUND = "User.NotFound";
     public const string EMAIL_NOT_VERIFIED = "User.EmailNotVerified";
+    public const string EMAIL_NOT_VERIFIED_RESENT = "User.EmailNotVerifiedResent";
     public const string ACCOUNT_SUSPENDED = "User.AccountSuspended";
     public const string ACCOUNT_BANNED = "User.AccountBanned";
     public const string INVALID_CREDENTIALS = "User.InvalidCredentials";
