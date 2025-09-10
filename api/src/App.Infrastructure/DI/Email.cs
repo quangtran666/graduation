@@ -1,9 +1,9 @@
 using System.Net;
 using System.Net.Mail;
 
+using App.Application.Auth.Services.Email;
 using App.Application.Common.Configurations;
-using App.Application.Common.Services;
-using App.Infrastructure.Services;
+using App.Infrastructure.Auth.Services.Email;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +27,7 @@ public static class Email
             : new NetworkCredential(emailSettings.Smtp.Username, emailSettings.Smtp.Password)
       });
 
-    services.AddScoped<IEmailService, EmailService>();
+    services.AddScoped<IAuthEmailService, AuthEmailService>();
 
     return services;
   }

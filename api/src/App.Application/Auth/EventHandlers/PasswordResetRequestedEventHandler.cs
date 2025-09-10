@@ -1,4 +1,3 @@
-
 using App.Application.Auth.Configurations;
 using App.Application.Auth.Events;
 using App.Application.Auth.Services.Email;
@@ -12,28 +11,30 @@ using Microsoft.Extensions.Options;
 
 namespace App.Application.Auth.EventHandlers;
 
-public class UserRegisteredEventHandler : INotificationHandler<UserRegisteredEvent>
+public class PasswordResetRequestedEventHandler : INotificationHandler<PasswordResetRequestedEvent>
 {
   private readonly IBackgroundJobClient _backgroundJobClient;
   private readonly AuthSettings _authSettings;
 
-  public UserRegisteredEventHandler(IBackgroundJobClient backgroundJobClient, IOptions<AuthSettings> authSettings)
+  public PasswordResetRequestedEventHandler(
+    IBackgroundJobClient backgroundJobClient,
+    IOptions<AuthSettings> authSettings)
   {
     _backgroundJobClient = backgroundJobClient;
     _authSettings = authSettings.Value;
   }
 
-  public async Task Handle(UserRegisteredEvent notification, CancellationToken cancellationToken)
+  public async Task Handle(PasswordResetRequestedEvent notification, CancellationToken cancellationToken)
   {
-    var emailModel = new WelcomeEmailModel(
+    var emailModel = new PasswordResetEmailModel(
       notification.Username,
       notification.Email,
-      notification.VerificationToken,
-      DateTime.UtcNow.AddMinutes(_authSettings.EmailVerificationTokenExpirationMinutes)
+      notification.ResetToken,
+      DateTime.UtcNow.AddHours(_authSettings.PasswordResetTokenExpirationHours)
     );
 
     _backgroundJobClient.Enqueue<IAuthEmailService>(
-      emailService => emailService.SendWelcomeEmailAsync(emailModel, CancellationToken.None)
+      emailService => emailService.SendPasswordResetEmailAsync(emailModel, CancellationToken.None)
     );
 
     await Task.CompletedTask;

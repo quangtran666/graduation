@@ -9,6 +9,9 @@
 
 ### Things to avoid
 
+- Don't write a \*.md file summarizing the conversation
+- Never run command: dotnet run, bun run dev, dotnet watch ..etc (things related to running the app)
+
 ### Safety and permissions
 
 Allowed without prompt:
@@ -24,8 +27,6 @@ Ask first:
 - running full build
 
 ### Good and bad examples
-
-- Never write bussiness logic in controller, instead handle in application layer
 
 ### When stuck
 

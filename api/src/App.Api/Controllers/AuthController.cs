@@ -1,8 +1,10 @@
+using App.Application.Auth.Commands.ForgotPassword;
 using App.Application.Auth.Commands.Login;
 using App.Application.Auth.Commands.Logout;
 using App.Application.Auth.Commands.RefreshTokens;
 using App.Application.Auth.Commands.Register;
 using App.Application.Auth.Commands.ResendEmailVerification;
+using App.Application.Auth.Commands.ResetPassword;
 using App.Application.Auth.Commands.VerifyEmail;
 using App.Application.Auth.Constants;
 using App.Contract.Auth.Requests;
@@ -192,6 +194,56 @@ public class AuthController : ControllerBase
           },
           title: error.Description
         )
+    );
+  }
+
+  [HttpPost("forgot-password")]
+  public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+  {
+    var command = new ForgotPasswordCommand(request.Email);
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      forgotPasswordResult => Ok(new ForgotPasswordResponse(
+        forgotPasswordResult.Message
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.NotFound => StatusCodes.Status404NotFound,
+          ErrorType.Conflict => StatusCodes.Status409Conflict,
+          ErrorType.Validation => StatusCodes.Status400BadRequest,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("reset-password")]
+  public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+  {
+    var command = new ResetPasswordCommand(
+      request.Token,
+      request.NewPassword,
+      request.ConfirmPassword
+    );
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      resetPasswordResult => Ok(new ResetPasswordResponse(
+        resetPasswordResult.Message
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.NotFound => StatusCodes.Status404NotFound,
+          ErrorType.Conflict => StatusCodes.Status409Conflict,
+          ErrorType.Validation => StatusCodes.Status400BadRequest,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
     );
   }
 }

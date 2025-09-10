@@ -28,4 +28,12 @@ public static class AuthErrors
     public const string TOKEN_EXPIRED = "EmailVerification.TokenExpired";
     public const string TOKEN_ALREADY_USED = "EmailVerification.TokenAlreadyUsed";
   }
+
+  public static class PasswordReset
+  {
+    public const string COOLDOWN_ACTIVE = "PasswordReset.CooldownActive";
+    public const string TOKEN_NOT_FOUND = "PasswordReset.TokenNotFound";
+    public const string TOKEN_EXPIRED = "PasswordReset.TokenExpired";
+    public const string TOKEN_ALREADY_USED = "PasswordReset.TokenAlreadyUsed";
+  }
 }

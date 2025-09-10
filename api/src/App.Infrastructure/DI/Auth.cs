@@ -46,6 +46,7 @@ public static class Auth
     services.AddScoped<JwtEvents>();
     services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<IPasswordService, PasswordService>();
+    services.AddScoped<IPasswordResetService, PasswordResetService>();
     return services;
   }
 }
