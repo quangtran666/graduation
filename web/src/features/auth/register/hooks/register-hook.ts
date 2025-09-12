@@ -2,13 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import { type TRegisterSchema, useRegisterSchema } from "../schemas/register-schema";
 import { registerUser } from "@/api/auth/register/endpoint";
-import { useTranslation } from "react-i18next";
 import type { ApiError } from "@/api/error";
 import { HTTP_STATUS } from "@/constants/http";
+
+import { type TRegisterSchema, useRegisterSchema } from "../schemas/register-schema";
 
 export const useRegisterHook = () => {
   const router = useRouter();
@@ -30,30 +31,37 @@ export const useRegisterHook = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       toast.success(data.message);
-      router.navigate({ to: "/verify-email", search: { email: data.user.email } });
+      void router.navigate({ to: "/verify-email", search: { email: data.user.email } });
     },
     onError: (error: ApiError) => {
       switch (error.response?.status) {
-        case HTTP_STATUS.CONFLICT:
+        case HTTP_STATUS.CONFLICT: {
           toast.error(t("register.error.userExists"));
           break;
-        case HTTP_STATUS.BAD_REQUEST:
+        }
+        case HTTP_STATUS.BAD_REQUEST: {
           toast.error(t("register.error.invalidInput"));
           break;
-        default:
+        }
+        default: {
           toast.error(t("register.error.failed"));
           break;
+        }
       }
     },
   });
 
-  const handleSubmit = (data: TRegisterSchema) => {
+  const onSubmit = (data: TRegisterSchema) => {
     registerMutation.mutate(data);
+  };
+
+  const formProperties = {
+    onSubmit: form.handleSubmit(onSubmit),
   };
 
   return {
     form,
-    onSubmit: form.handleSubmit(handleSubmit),
+    formProperties,
     isLoading: registerMutation.isPending,
   };
 };

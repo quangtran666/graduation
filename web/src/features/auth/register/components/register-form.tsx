@@ -20,11 +20,11 @@ import { useRegisterHook } from "../hooks/register-hook";
 
 export function RegisterForm({ className, ...properties }: ComponentProps<"form">) {
   const { t } = useTranslation("form");
-  const { form, onSubmit, isLoading } = useRegisterHook();
+  const { form, formProperties, isLoading } = useRegisterHook();
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} {...properties} className={cn("flex flex-col gap-6", className)}>
+      <form {...formProperties} {...properties} className={cn("flex flex-col gap-6", className)}>
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">{t("register.title")}</h1>
           <p className="text-muted-foreground text-sm text-balance">{t("register.description")}</p>

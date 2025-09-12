@@ -1,11 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { GalleryVerticalEnd } from "lucide-react";
+import { z } from "zod";
 
 import { LanguageSwitch } from "@/components/common/language-switch";
 import { ModeToggle } from "@/components/common/theme-switch";
 import { ResetPasswordForm } from "@/features/auth/reset-password/components/reset-password-form";
 
+const resetPasswordSearchSchema = z.object({
+  token: z.string().optional(),
+});
+
 export const Route = createFileRoute("/(auth)/reset-password")({
+  validateSearch: resetPasswordSearchSchema,
   head: ({ match }) => ({
     meta: [
       {
@@ -17,6 +23,8 @@ export const Route = createFileRoute("/(auth)/reset-password")({
 });
 
 function RouteComponent() {
+  const { token } = Route.useSearch();
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -34,7 +42,7 @@ function RouteComponent() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <ResetPasswordForm />
+            <ResetPasswordForm token={token} />
           </div>
         </div>
       </div>

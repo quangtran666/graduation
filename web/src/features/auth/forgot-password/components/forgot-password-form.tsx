@@ -19,13 +19,32 @@ import { useForgotPasswordHook } from "../hooks/forgot-password-hook";
 
 export function ForgotPasswordForm({ className, ...properties }: ComponentProps<"form">) {
   const { t } = useTranslation("form");
-  const { form, onSubmit } = useForgotPasswordHook({
-    handleSubmit: () => void Promise.resolve(),
-  });
+  const { form, formProperties, isLoading, isSuccess } = useForgotPasswordHook();
+
+  if (isSuccess) {
+    return (
+      <div className={cn("flex flex-col gap-6", className)}>
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h1 className="text-2xl font-bold">{t("forgotPassword.title")}</h1>
+          <p className="text-muted-foreground text-sm text-balance">
+            {t("forgotPassword.success")}
+          </p>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Button asChild className="w-full">
+            <Link to="/login">{t("common.backTo", { page: t("login.pageTitle") })}</Link>
+          </Button>
+          <Button variant="outline" onClick={() => globalThis.location.reload()} className="w-full">
+            Send another email
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} {...properties} className={cn("flex flex-col gap-6", className)}>
+      <form {...formProperties} {...properties} className={cn("flex flex-col gap-6", className)}>
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">{t("forgotPassword.title")}</h1>
           <p className="text-muted-foreground text-sm text-balance">
@@ -46,12 +65,8 @@ export function ForgotPasswordForm({ className, ...properties }: ComponentProps<
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              t("forgotPassword.resetPassword")
-            )}
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? <Loader2 className="animate-spin" /> : t("forgotPassword.resetPassword")}
           </Button>
         </div>
         <div className="text-center text-sm">

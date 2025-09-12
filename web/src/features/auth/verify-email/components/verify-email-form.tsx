@@ -1,8 +1,8 @@
+import { getRouteApi, Link } from "@tanstack/react-router";
 import { Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getRouteApi, Link } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
 import { ResendButton } from "@/features/auth/verify-email/components/resend-button";
 
 const routeApi = getRouteApi("/(auth)/verify-email");

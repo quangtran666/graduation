@@ -42,7 +42,8 @@ public class UserConfiguration : BaseEntityConfiguration<User>
       .Property(x => x.Status)
       .HasColumnName("trang_thai")
       .HasConversion<int>()
-      .HasDefaultValue(UserStatus.Active);
+      .HasDefaultValue(UserStatus.Active)
+      .HasSentinel(0);
     builder
       .Property(x => x.TokenVersion)
       .HasColumnName("phien_ban_token")

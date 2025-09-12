@@ -11,6 +11,7 @@
 
 - Don't write a \*.md file summarizing the conversation
 - Never run command: dotnet run, bun run dev, dotnet watch ..etc (things related to running the app)
+- Do not write any files other than the page file inside the routes folder.
 
 ### Safety and permissions
 
@@ -38,6 +39,13 @@ Ask first:
 #### Project Hint
 
 - See `api/src/App.Domain/Entities` for domain entities
+- See `web/src/api` for API calls
+- See `web/src/features` for feature-specific code
+- See `web/src/locales` for localization files
+- See `api/src/App.Contract` for DTOs and response models
+- See `api/src/App.Application` for business logic and services
+- See `api/src/App.API` for controllers and middleware
+- See `api/src/App.Infrastructure` for external services and integrations
 
 #### Backend
 

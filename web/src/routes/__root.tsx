@@ -1,6 +1,7 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, HeadContent, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Toaster } from "sonner";
 
 import i18n from "@/lib/i18n/i18n";
 
@@ -20,6 +21,7 @@ function RootComponent() {
       <HeadContent />
       <Outlet />
       <TanStackRouterDevtools />
+      <Toaster /> {/* Todo: Move this to better location */}
     </>
   );
 }
