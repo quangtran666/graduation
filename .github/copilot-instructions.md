@@ -1,19 +1,35 @@
-### Things to do
+### Coding Conventions
 
 - For single-line if statements, omit curly braces `{}`
 - When implementing EF Core repositories for mutations, avoid using `async/await` and `SaveChangesAsync`. Instead, consolidate all changes at the UnitOfWork level to call `SaveChangesAsync` once or use transactions
-- Using Options Pattern in ASP.NET Core when possible
-- Using ErrorOr package for result pattern implementation, never throw exceptions for flow control
-- Never using magic string, number, find relative files for constants or if not exist, create a new one
-- Do not use fully qualified name, instead use qualified namespace
+- Use Options Pattern in ASP.NET Core when possible (see `AuthSettings` in `App.Application.Auth.Configurations`)
+- Use ErrorOr package for result pattern implementation, never throw exceptions for flow control
+- Never use magic strings/numbers - find relative constant files or create new ones
+- Do not use fully qualified names, instead use qualified namespace imports or aliases
+- Use `record` types for commands/queries and DTOs (see `LoginCommand` pattern)
 
-### Things to avoid
+### Project-Specific Workflows
+
+**Backend Development:**
+
+- Use `make api-build` instead of direct dotnet commands
+- Database migrations: `make db-add name=MigrationName`, `make db-update`
+- Centralized package versions in `Directory.Packages.props` - never add versions to individual `.csproj` files
+
+**Frontend Development:**
+
+- Routes follow file-based structure in `web/src/routes/` (use parentheses for route groups like `(auth)/`)
+- Features organized by domain: `web/src/features/{domain}/{feature}/` with `components/`, `hooks/`, `schemas/` subfolders
+- API calls structured: `web/src/api/{domain}/{feature}/` with separate `endpoint.ts`, `request.ts`, `response.ts` files
+
+### Things to Avoid
 
 - Don't write a \*.md file summarizing the conversation
-- Never run command: dotnet run, bun run dev, dotnet watch ..etc (things related to running the app)
-- Do not write any files other than the page file inside the routes folder.
+- Never run commands: `dotnet run`, `bun run dev`, `dotnet watch` etc
+- Do not write files other than page files inside the `routes/` folder
+- Avoid direct package version references in `.csproj` files (use centralized `Directory.Packages.props`)
 
-### Safety and permissions
+### Safety and Permissions
 
 Allowed without prompt:
 
@@ -22,10 +38,86 @@ Allowed without prompt:
 
 Ask first:
 
-- package installs,
+- package installs
 - git push
 - deleting files, chmod
 - running full build
+
+### Architecture & Implementation Patterns
+
+#### Backend (Clean Architecture)
+
+**CQRS with MediatR Pattern:**
+
+- Commands/Queries as records: `public record LoginCommand(string Email, string Password) : IRequest<ErrorOr<LoginResult>>;`
+- Handlers in separate files: `{Command|Query}Handler.cs` implementing `IRequestHandler<TRequest, TResponse>`
+- Controllers are thin - only inject `IMediator` and forward requests (see `AuthController`)
+
+**Layer Boundaries:**
+
+- **API Layer (`App.Api`)**: Controllers, middleware, dependency injection configuration
+- **Application Layer (`App.Application`)**: Business logic, CQRS handlers, validators, services
+- **Domain Layer (`App.Domain`)**: Entities, enums, domain logic
+- **Infrastructure Layer (`App.Infrastructure`)**: EF Core, external services, implementations
+- **Contract Layer (`App.Contract`)**: DTOs, request/response models
+
+**Dependency Injection Pattern:**
+
+- Each layer has `DI/DependencyInjection.cs` with extension methods: `AddApplication()`, `AddInfrastructure()`, etc.
+- Clean `Program.cs` with sequential layer registration
+
+**Feature Organization:**
+
+- Group by feature: `Auth/{Commands|Events|Services}/FeatureName/`
+- Each command/query has dedicated folder with handler, validator, and related types
+
+#### Frontend (React + TanStack)
+
+**File-based Routing:**
+
+- Routes in `web/src/routes/` map to URLs
+- Route groups use parentheses: `(auth)/login.tsx` → `/login`
+- Root route context provides `i18n` and `queryClient`
+
+**Feature-First Organization:**
+
+- `web/src/features/{domain}/{feature}/` structure
+- Sub-folders: `components/`, `hooks/`, `schemas/` per feature
+- API calls: `web/src/api/{domain}/{feature}/` with `endpoint.ts`, `request.ts`, `response.ts`
+
+**Form Patterns:**
+
+- React Hook Form + Zod validation
+- Custom hooks for form logic: `use{Feature}Hook`
+- ErrorOr-compatible error handling with neverthrow
+
+### Development Commands
+
+**Backend (use Makefiles, not direct dotnet commands):**
+
+```bash
+make api-build          # Build solution
+make db-add name=Name  # Add migration
+make db-update         # Apply migrations
+```
+
+**Package Management:**
+
+- All versions centralized in `api/Directory.Packages.props`
+- Never add `<PackageReference Version="...">` to individual `.csproj` files
+- Use `<PackageReference Include="PackageName" />` only
+
+### Project Information
+
+#### Key Directories
+
+- `api/src/App.Domain/Entities` - Domain entities
+- `api/src/App.Contract` - DTOs and response models
+- `api/src/App.Application` - Business logic and CQRS handlers
+- `api/src/App.Infrastructure` - EF Core and external services
+- `web/src/features` - Feature-specific React components and logic
+- `web/src/api` - Frontend API client functions
+- `web/src/locales` - i18next translation files
 
 ### Good and bad examples
 
@@ -33,19 +125,6 @@ Ask first:
 
 - ask a clarifying question, propose a short plan
 - do not make up answers, say "I don't know" if you don't know
-
-### Project Information
-
-#### Project Hint
-
-- See `api/src/App.Domain/Entities` for domain entities
-- See `web/src/api` for API calls
-- See `web/src/features` for feature-specific code
-- See `web/src/locales` for localization files
-- See `api/src/App.Contract` for DTOs and response models
-- See `api/src/App.Application` for business logic and services
-- See `api/src/App.API` for controllers and middleware
-- See `api/src/App.Infrastructure` for external services and integrations
 
 #### Backend
 

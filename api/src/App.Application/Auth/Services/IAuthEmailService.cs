@@ -2,7 +2,7 @@ using App.Application.Common.Models.Email;
 
 using ErrorOr;
 
-namespace App.Application.Auth.Services.Email;
+namespace App.Application.Auth.Services;
 
 public interface IAuthEmailService
 {

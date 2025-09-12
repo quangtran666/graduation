@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { type TLoginSchema, useLoginSchema } from "../schemas/login-schema";
 
@@ -8,7 +9,7 @@ interface IUseLoginHook {
 }
 
 export const useLoginHook = ({ handleSubmit }: IUseLoginHook) => {
-  // const { t } = useTranslation("form", { keyPrefix: "login" });
+  const { t } = useTranslation("form");
   const loginSchema = useLoginSchema();
   const form = useForm<TLoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -16,7 +17,6 @@ export const useLoginHook = ({ handleSubmit }: IUseLoginHook) => {
     defaultValues: {
       username_or_email: "",
       password: "",
-      remember: false,
     },
   });
 

@@ -3,10 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+using App.Application.Auth.Configurations;
 using App.Application.Auth.Constants;
 using App.Application.Auth.Services;
 using App.Domain.Entities;
-using App.Infrastructure.Auth.Configurations;
 
 using ErrorOr;
 

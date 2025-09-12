@@ -1,5 +1,6 @@
 using System.Security.Claims;
 
+using App.Application.Auth.Configurations;
 using App.Application.Auth.Constants;
 using App.Application.Common.Data;
 using App.Domain.Entities;
@@ -7,6 +8,7 @@ using App.Domain.Enums;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace App.Infrastructure.Auth.Events;
 
@@ -17,6 +19,23 @@ public class JwtEvents : JwtBearerEvents
   public JwtEvents(IServiceProvider serviceProvider)
   {
     _serviceProvider = serviceProvider;
+  }
+
+  public override async Task MessageReceived(MessageReceivedContext context)
+  {
+    if (string.IsNullOrEmpty(context.Token))
+    {
+      using var scope = _serviceProvider.CreateScope();
+      var cookieSettings = scope.ServiceProvider.GetRequiredService<IOptions<AuthCookieSettings>>().Value;
+
+      if (context.Request.Cookies.TryGetValue(cookieSettings.AccessTokenCookieName, out var accessToken)
+          && !string.IsNullOrEmpty(accessToken))
+      {
+        context.Token = accessToken;
+      }
+    }
+
+    await base.MessageReceived(context);
   }
 
   public override async Task TokenValidated(TokenValidatedContext context)

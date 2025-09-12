@@ -25,7 +25,6 @@ export const useLoginSchema = () => {
         error: t("common.form.required", { field: t("common.form.name.password") }),
       })
       .min(6, { error: t("common.form.min", { length: 6 }) }),
-    remember: z.boolean(),
   });
 
   return LOGIN_SCHEMA;

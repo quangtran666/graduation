@@ -1,9 +1,9 @@
 using System.Net;
 using System.Net.Mail;
 
-using App.Application.Auth.Services.Email;
+using App.Application.Auth.Services;
 using App.Application.Common.Configurations;
-using App.Infrastructure.Auth.Services.Email;
+using App.Infrastructure.Auth.Services;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,7 +1,7 @@
 using App.Application.Auth.Commands.ForgotPassword;
 using App.Application.Auth.Commands.Login;
 using App.Application.Auth.Commands.Logout;
-using App.Application.Auth.Commands.RefreshTokens;
+using App.Application.Auth.Commands.RefreshToken;
 using App.Application.Auth.Commands.Register;
 using App.Application.Auth.Commands.ResendEmailVerification;
 using App.Application.Auth.Commands.ResetPassword;
@@ -77,21 +77,18 @@ public class AuthController : ControllerBase
     return result.MatchFirst(
       loginResult => Ok(new LoginResponse(
         loginResult.Message,
-        loginResult.AccessToken,
-        loginResult.RefreshToken,
         new UserInfo(
           loginResult.User.Id,
           loginResult.User.Username,
           loginResult.User.Email,
           loginResult.User.EmailVerified
-        ),
-        loginResult.IsRememberMe // Truyền thông tin remember me cho frontend
+        )
       )),
       error => error.Code == AuthErrors.User.EMAIL_NOT_VERIFIED_RESENT
         ? Problem(
             statusCode: StatusCodes.Status403Forbidden,
             title: error.Description,
-            detail: AuthConstants.ResponseDetails.EMAIL_NOT_VERIFIED_RESENT // Sử dụng constant thay vì magic string
+            detail: AuthConstants.ResponseDetails.EMAIL_NOT_VERIFIED_RESENT
           )
         : Problem(
             statusCode: error.Type switch
@@ -107,15 +104,14 @@ public class AuthController : ControllerBase
   }
 
   [HttpPost("refresh")]
-  public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+  public async Task<IActionResult> RefreshToken()
   {
-    var command = new RefreshTokenCommand(request.RefreshToken);
+    var command = new RefreshTokenCommand();
     var result = await _mediator.Send(command);
 
     return result.MatchFirst(
       refreshResult => Ok(new RefreshTokenResponse(
-        refreshResult.AccessToken,
-        refreshResult.RefreshToken
+        refreshResult.Message
       )),
       error => Problem(
         statusCode: error.Type switch
@@ -130,9 +126,9 @@ public class AuthController : ControllerBase
   }
 
   [HttpPost("logout")]
-  public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
+  public async Task<IActionResult> Logout()
   {
-    var command = new LogoutCommand(request.RefreshToken);
+    var command = new LogoutCommand();
     var result = await _mediator.Send(command);
 
     return result.MatchFirst(

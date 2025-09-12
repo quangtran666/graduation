@@ -1,5 +1,5 @@
 using App.Application.Auth.Events;
-using App.Application.Auth.Services.Email;
+using App.Application.Auth.Services;
 using App.Application.Common.Models.Email;
 
 using Hangfire;

@@ -4,6 +4,4 @@ using MediatR;
 
 namespace App.Application.Auth.Commands.Logout;
 
-public record LogoutCommand(
-  string RefreshToken
-) : IRequest<ErrorOr<string>>;
+public record LogoutCommand : IRequest<ErrorOr<string>> { }

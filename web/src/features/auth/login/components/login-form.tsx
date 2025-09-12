@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import { GithubIcon } from "@/components/icon/github";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -61,24 +60,6 @@ export function LoginForm({ className, ...properties }: React.ComponentProps<"fo
                   <Input type="password" {...field} variant="clean" />
                 </FormControl>
                 <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="remember"
-            render={({ field }) => (
-              <FormItem className="flex items-center space-x-2">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    name={field.name}
-                    ref={field.ref}
-                    variant="outline"
-                  />
-                </FormControl>
-                <FormLabel className="text-sm font-normal">{t("login.remember")}</FormLabel>
               </FormItem>
             )}
           />

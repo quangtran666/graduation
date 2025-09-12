@@ -2,8 +2,6 @@ using ErrorOr;
 
 using MediatR;
 
-namespace App.Application.Auth.Commands.RefreshTokens;
+namespace App.Application.Auth.Commands.RefreshToken;
 
-public record RefreshTokenCommand(
-  string RefreshToken
-) : IRequest<ErrorOr<RefreshTokenResult>>;
+public record RefreshTokenCommand : IRequest<ErrorOr<RefreshTokenResult>> { }

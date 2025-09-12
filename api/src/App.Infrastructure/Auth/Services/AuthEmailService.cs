@@ -1,4 +1,4 @@
-using App.Application.Auth.Services.Email;
+using App.Application.Auth.Services;
 using App.Application.Common.Configurations;
 using App.Application.Common.Models.Email;
 
@@ -9,7 +9,7 @@ using FluentEmail.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace App.Infrastructure.Auth.Services.Email;
+namespace App.Infrastructure.Auth.Services;
 
 public partial class AuthEmailService : IAuthEmailService
 {

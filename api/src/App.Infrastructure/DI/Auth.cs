@@ -2,13 +2,14 @@ using System.Text;
 
 using App.Application.Auth.Configurations;
 using App.Application.Auth.Services;
-using App.Infrastructure.Auth.Configurations;
 using App.Infrastructure.Auth.Events;
 using App.Infrastructure.Auth.Services;
+using App.Infrastructure.Services;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace App.Infrastructure.DI;
@@ -19,6 +20,9 @@ public static class Auth
   {
     services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
     services.Configure<AuthSettings>(configuration.GetSection(AuthSettings.SectionName));
+    services.Configure<AuthCookieSettings>(configuration.GetSection(AuthCookieSettings.Section));
+    services.ConfigureOptions<PostConfigureAuthCookieSettings>();
+
     var jwtSettings = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>();
 
     services.AddAuthentication(options =>
@@ -47,6 +51,8 @@ public static class Auth
     services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<IPasswordService, PasswordService>();
     services.AddScoped<IPasswordResetService, PasswordResetService>();
+    services.AddScoped<IAuthCookieService, AuthCookieService>();
+    services.AddHttpContextAccessor();
     return services;
   }
 }
