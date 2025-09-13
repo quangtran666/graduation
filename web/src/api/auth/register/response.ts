@@ -1,9 +1,6 @@
+import type { UserInfo } from "@/api/common/userinfo";
+
 export interface RegisterResponse {
   message: string;
-  user: {
-    id: number;
-    username: string;
-    email: string;
-    emailVerified: boolean;
-  };
+  user: UserInfo;
 }

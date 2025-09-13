@@ -19,11 +19,11 @@ import { useLoginHook } from "../hooks/login-hook";
 
 export function LoginForm({ className, ...properties }: React.ComponentProps<"form">) {
   const { t } = useTranslation("form");
-  const { form, onSubmit } = useLoginHook({ handleSubmit: () => Promise.resolve() });
+  const { form, formProperties, isLoading } = useLoginHook();
 
   return (
     <Form {...form}>
-      <form className={cn("flex flex-col gap-6", className)} onSubmit={onSubmit} {...properties}>
+      <form {...formProperties} {...properties} className={cn("flex flex-col gap-6", className)}>
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">{t("login.title")}</h1>
           <p className="text-muted-foreground text-sm text-balance">{t("login.description")}</p>
@@ -63,12 +63,8 @@ export function LoginForm({ className, ...properties }: React.ComponentProps<"fo
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
-            {form.formState.isSubmitting ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              t("common.signIn")
-            )}
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? <Loader2 className="size-4 animate-spin" /> : t("common.signIn")}
           </Button>
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
             <span className="bg-background text-muted-foreground relative z-10 px-2">

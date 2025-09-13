@@ -6,6 +6,5 @@ namespace App.Application.Auth.Commands.Login;
 
 public record LoginCommand(
   string UsernameOrEmail,
-  string Password,
-  bool RememberMe = false
+  string Password
 ) : IRequest<ErrorOr<LoginResult>>;

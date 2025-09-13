@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { useResendVerificationHook } from "@/features/auth/verify-email/hooks/resend-verification-hook";
 import { useTranslation } from "react-i18next";
 
-interface ResendButtonProps {
+import { Button } from "@/components/ui/button";
+import { useResendVerificationHook } from "@/features/auth/verify-email/hooks/resend-verification-hook";
+
+interface ResendButtonProperties {
   email: string;
 }
 
-export function ResendButton({ email }: ResendButtonProps) {
+export function ResendButton({ email }: ResendButtonProperties) {
   const { t } = useTranslation("form");
   const { handleResend, isLoading, isOnCooldown, cooldownSeconds } =
     useResendVerificationHook(email);

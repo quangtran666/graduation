@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -26,7 +27,7 @@ export const useEmailConfirmationHook = () => {
   useEffect(() => {
     if (token && !verifyEmailMutation.isSuccess && !verifyEmailMutation.isError)
       verifyEmailMutation.mutate({ token });
-  }, [token, verifyEmailMutation]);
+  }, [token]);
 
   return {
     isLoading: verifyEmailMutation.isPending,

@@ -68,8 +68,7 @@ public class AuthController : ControllerBase
   {
     var command = new LoginCommand(
       request.UsernameOrEmail,
-      request.Password,
-      request.RememberMe
+      request.Password
     );
 
     var result = await _mediator.Send(command);

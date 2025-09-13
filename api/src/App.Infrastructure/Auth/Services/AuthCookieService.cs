@@ -72,7 +72,7 @@ public class AuthCookieService : IAuthCookieService
       Secure = _cookieSettings.Secure,
       SameSite = Enum.Parse<SameSiteMode>(_cookieSettings.SameSite),
       Path = _cookieSettings.Path,
-      Expires = DateTimeOffset.UtcNow.AddDays(-1)
+      Expires = DateTimeOffset.UtcNow.AddDays(-1) // Remove cookie by setting expiration in the past
     };
 
     if (!string.IsNullOrEmpty(_cookieSettings.Domain))

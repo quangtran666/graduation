@@ -1,7 +1,6 @@
 import "@/App.css";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 
@@ -16,14 +15,12 @@ if (!rootElement) throw new Error('Root element "#root" not found');
 if (!rootElement.hasChildNodes()) {
   const root = createRoot(rootElement);
   root.render(
-    <StrictMode>
-      <ThemeProvider defaultTheme="system" storageKey={THEME_STORAGE_KEY}>
-        <I18nextProvider i18n={i18n}>
-          <QueryRouterProvider>
-            <ReactQueryDevtools />
-          </QueryRouterProvider>
-        </I18nextProvider>
-      </ThemeProvider>
-    </StrictMode>,
+    <ThemeProvider defaultTheme="system" storageKey={THEME_STORAGE_KEY}>
+      <I18nextProvider i18n={i18n}>
+        <QueryRouterProvider>
+          <ReactQueryDevtools />
+        </QueryRouterProvider>
+      </I18nextProvider>
+    </ThemeProvider>,
   );
 }
