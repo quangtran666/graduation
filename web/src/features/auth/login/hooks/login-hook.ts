@@ -8,13 +8,13 @@ import { toast } from "sonner";
 import { loginEndpoint } from "@/api/auth/login/endpoint";
 import type { ApiError } from "@/api/error";
 import { HTTP_STATUS } from "@/constants/http";
-import { useAuth } from "@/hooks/use-auth";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { type TLoginSchema, useLoginSchema } from "../schemas/login-schema";
 
 export const useLoginHook = () => {
   const router = useRouter();
-  const { login } = useAuth();
+  const { setUser } = useCurrentUser();
   const loginSchema = useLoginSchema();
   const { t } = useTranslation("form");
 
@@ -30,7 +30,7 @@ export const useLoginHook = () => {
   const loginMutation = useMutation({
     mutationFn: loginEndpoint,
     onSuccess: (data) => {
-      login(data.user);
+      setUser(data);
       toast.success(data.message);
       void router.navigate({ to: "/" });
     },

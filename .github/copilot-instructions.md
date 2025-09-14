@@ -145,6 +145,7 @@ make db-update         # Apply migrations
 - **Background Jobs**: Hangfire
 - **Email Service**: FluentEmail
 - **Error Handling**: ErrorOr for result pattern implementation
+- **Authentication**: JWT with cookie-based token storage (access tokens stored in HTTP-only cookies)
 
 ### Frontend
 

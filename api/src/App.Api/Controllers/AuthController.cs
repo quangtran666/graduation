@@ -7,6 +7,7 @@ using App.Application.Auth.Commands.ResendEmailVerification;
 using App.Application.Auth.Commands.ResetPassword;
 using App.Application.Auth.Commands.VerifyEmail;
 using App.Application.Auth.Constants;
+using App.Application.Auth.Queries.GetCurrentUser;
 using App.Contract.Auth.Requests;
 using App.Contract.Auth.Responses;
 
@@ -14,6 +15,7 @@ using ErrorOr;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Api.Controllers;
@@ -234,6 +236,36 @@ public class AuthController : ControllerBase
         {
           ErrorType.NotFound => StatusCodes.Status404NotFound,
           ErrorType.Conflict => StatusCodes.Status409Conflict,
+          ErrorType.Validation => StatusCodes.Status400BadRequest,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpGet("me")]
+  [Authorize]
+  public async Task<IActionResult> GetCurrentUser()
+  {
+    var query = new GetCurrentUserQuery();
+    var result = await _mediator.Send(query);
+
+    return result.MatchFirst(
+      getCurrentUserResult => Ok(new GetCurrentUserResponse(
+        getCurrentUserResult.Message,
+        new UserInfo(
+          getCurrentUserResult.User.Id,
+          getCurrentUserResult.User.Username,
+          getCurrentUserResult.User.Email,
+          getCurrentUserResult.User.EmailVerified
+        )
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
+          ErrorType.NotFound => StatusCodes.Status404NotFound,
           ErrorType.Validation => StatusCodes.Status400BadRequest,
           _ => StatusCodes.Status500InternalServerError
         },

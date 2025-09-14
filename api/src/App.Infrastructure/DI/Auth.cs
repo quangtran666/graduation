@@ -52,6 +52,7 @@ public static class Auth
     services.AddScoped<IPasswordService, PasswordService>();
     services.AddScoped<IPasswordResetService, PasswordResetService>();
     services.AddScoped<IAuthCookieService, AuthCookieService>();
+    services.AddScoped<ICurrentUserService, CurrentUserService>();
     services.AddHttpContextAccessor();
     return services;
   }
