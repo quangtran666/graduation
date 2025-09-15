@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Login"
+  },
+  "register": {
+    "title": "Register"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password"
+  },
+  "resetPassword": {
+    "title": "Reset Password"
+  },
+  "verifyEmail": {
+    "title": "Verify Email"
+  },
+  "emailConfirmed": {
+    "title": "Email Confirmed"
+  }
+}

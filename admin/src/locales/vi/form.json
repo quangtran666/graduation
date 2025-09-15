@@ -1,0 +1,121 @@
+{
+  "common": {
+    "signIn": "Đăng nhập",
+    "continueWith": "Tiếp tục với {{action}}",
+    "gotohome": "Trở về trang chủ",
+    "orContinueWith": "Hoặc tiếp tục với",
+    "signInWith": "Đăng nhập với {{provider}}",
+    "signUpWith": "Đăng ký với {{provider}}",
+    "backTo": "Quay lại {{page}}",
+    "form": {
+      "name": {
+        "username": "Tên người dùng",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "confirmPassword": "Xác nhận mật khẩu"
+      },
+      "required": "Trường {{field}} là bắt buộc",
+      "min": "Trường phải có ít nhất {{length}} ký tự",
+      "max": "Trường phải có nhiều nhất {{length}} ký tự",
+      "emailNoAt": "{{field}} không được là địa chỉ email"
+    }
+  },
+  "login": {
+    "pageTitle": "Đăng nhập",
+    "title": "Đăng nhập vào tài khoản của bạn",
+    "description": "Nhập email bên dưới để đăng nhập vào tài khoản của bạn",
+    "email": "Email",
+    "usernameOrEmail": "Tên người dùng hoặc email",
+    "password": "Mật khẩu",
+    "forgotPassword": "Quên mật khẩu?",
+    "remember": "Luôn đăng nhập",
+    "noAccount": "Không có tài khoản?",
+    "signUp": "Đăng ký",
+    "validation": {
+      "usernameOrEmailInvalid": "Tên người dùng hoặc email không hợp lệ",
+      "passwordRequired": "Mật khẩu là bắt buộc"
+    },
+    "success": "Đăng nhập thành công",
+    "error": "Đăng nhập thất bại"
+  },
+  "register": {
+    "pageTitle": "Đăng ký",
+    "title": "Tạo tài khoản",
+    "description": "Nhập email bên dưới để tạo tài khoản",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "signUp": "Đăng ký",
+    "username": "Tên người dùng",
+    "validation": {
+      "email": "Email là bắt buộc",
+      "password": "Mật khẩu là bắt buộc",
+      "username": "Tên người dùng là bắt buộc",
+      "confirmPassword": "Xác nhận mật khẩu là bắt buộc",
+      "passwordMismatch": "Mật khẩu không khớp",
+      "usernameNoSpaces": "Tên người dùng không được chứa khoảng trắng"
+    },
+    "success": "Tạo tài khoản thành công, vui lòng kiểm tra email để xác thực",
+    "error": {
+      "userExists": "Người dùng đã tồn tại",
+      "invalidInput": "Vui lòng kiểm tra lại thông tin",
+      "failed": "Đăng ký thất bại. Vui lòng thử lại."
+    }
+  },
+  "forgotPassword": {
+    "title": "Quên mật khẩu?",
+    "description": "Nhập email bên dưới để đặt lại mật khẩu",
+    "email": "Email",
+    "resetPassword": "Đặt lại mật khẩu",
+    "rememberPassword": "Nhớ mật khẩu?",
+    "validation": {
+      "emailInvalid": "Email không hợp lệ"
+    },
+    "success": "Email đặt lại mật khẩu đã được gửi thành công. Vui lòng kiểm tra email của bạn."
+  },
+  "resetPassword": {
+    "title": "Đặt lại mật khẩu",
+    "description": "Nhập mật khẩu mới bên dưới",
+    "password": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "resetPassword": "Đặt lại mật khẩu",
+    "rememberPassword": "Nhớ lại mật khẩu?",
+    "validation": {
+      "passwordMismatch": "Mật khẩu không khớp",
+      "tokenInvalid": "Mã đặt lại mật khẩu không hợp lệ hoặc thiếu"
+    },
+    "success": "Đặt lại mật khẩu thành công! Vui lòng đăng nhập bằng mật khẩu mới.",
+    "error": "Đặt lại mật khẩu thất bại"
+  },
+  "verifyEmail": {
+    "title": "Xác thực email của bạn",
+    "description": "Một liên kết xác thực đã được gửi đến email của bạn. Vui lòng kiểm tra hộp thư đến và nhấp vào liên kết để xác thực địa chỉ email của bạn.",
+    "resendTitle": "Không nhận được email? Kiểm tra thư mục spam của bạn hoặc thử gửi lại.",
+    "resend": "Gửi lại email xác thực",
+    "backToLogin": "Quay lại đăng nhập",
+    "success": "Gửi lại email xác thực thành công. Vui lòng kiểm tra email của bạn.",
+    "cooldown": "Yêu cầu lại sau {{seconds}} giây.",
+    "error": {
+      "userNotFound": "Không tìm thấy người dùng",
+      "waitingPeriodOrAlreadyVerified": "Email đã được xác thực hoặc đang trong thời gian chờ",
+      "failed": "Gửi lại email xác thực thất bại. Vui lòng thử lại sau."
+    }
+  },
+  "emailConfirm": {
+    "title": "Email đã được xác minh",
+    "description": "Email của bạn đã được xác minh thành công. Bây giờ bạn có thể truy cập tất cả các tính năng của tài khoản.",
+    "verifying": {
+      "title": "Đang xác minh email của bạn",
+      "description": "Vui lòng chờ trong khi chúng tôi xác minh địa chỉ email của bạn..."
+    },
+    "success": {
+      "title": "Xác minh email thành công!",
+      "description": "Email của bạn đã được xác minh. Bây giờ bạn có thể đăng nhập vào tài khoản của mình."
+    },
+    "error": {
+      "title": "Xác minh thất bại",
+      "description": "Chúng tôi không thể xác minh email của bạn. Liên kết có thể đã hết hạn hoặc không hợp lệ.",
+      "failed": "Xác minh email thất bại. Liên kết xác minh có thể không hợp lệ hoặc đã hết hạn."
+    }
+  }
+}

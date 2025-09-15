@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Đăng nhập"
+  },
+  "register": {
+    "title": "Đăng ký"
+  },
+  "forgotPassword": {
+    "title": "Quên mật khẩu"
+  },
+  "resetPassword": {
+    "title": "Đặt lại mật khẩu"
+  },
+  "verifyEmail": {
+    "title": "Xác minh email"
+  },
+  "emailConfirmed": {
+    "title": "Email đã được xác nhận"
+  }
+}

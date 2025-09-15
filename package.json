@@ -15,10 +15,13 @@
   "lint-staged": {
     "web/**/*.{js,jsx,ts,tsx}": [
       "bun --cwd web run lint:staged",
-      "bun --cwd web run prettier:staged"
+      "bun --cwd web run prettier:staged",
+      "bun --cwd admin run lint:staged",
+      "bun --cwd admin run prettier:staged"
     ],
     "web/**/*.{json,css,md}": [
-      "bun --cwd web run prettier:staged"
+      "bun --cwd web run prettier:staged",
+      "bun --cwd admin run prettier:staged"
     ],
     "api/**/*.{cs,csproj}": [
       "dotnet format api --include"
