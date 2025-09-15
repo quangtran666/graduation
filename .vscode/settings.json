@@ -1,5 +1,7 @@
 {
-  "eslint.workingDirectories": ["web"],
+  "eslint.workingDirectories": [
+    "web"
+  ],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
@@ -14,12 +16,18 @@
     "**/routeTree.gen.ts": true
   },
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "i18n-ally.localesPaths": ["web/src/locales"],
+  "i18n-ally.localesPaths": [
+    "web/src/locales"
+  ],
   "i18n-ally.keystyle": "nested",
   "i18n-ally.namespace": true,
   "i18n-ally.pathMatcher": "{locale}/{namespace}.json",
-  "i18n-ally.enabledParsers": ["json"],
+  "i18n-ally.enabledParsers": [
+    "json"
+  ],
   "i18n-ally.displayLanguage": "en",
   "i18n-ally.sourceLanguage": "en",
-  "i18n-ally.enabledFrameworks": ["react-i18next"]
+  "i18n-ally.enabledFrameworks": [
+    "react-i18next"
+  ]
 }

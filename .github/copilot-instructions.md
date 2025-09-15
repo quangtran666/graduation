@@ -10,24 +10,32 @@
 
 ### Project-Specific Workflows
 
+**Multi-Frontend Architecture:**
+
+- Two separate React applications: `web` (port 3000) and `admin` (port 3100)
+- Both share identical tech stack but separate feature sets
+- Root workspace uses Bun workspaces with shared lint-staged configuration
+
 **Backend Development:**
 
 - Use `make api-build` instead of direct dotnet commands
 - Database migrations: `make db-add name=MigrationName`, `make db-update`
+- Additional commands: `make api-run`, `make api-watch`, `make db-remove`, `make db-list`
 - Centralized package versions in `Directory.Packages.props` - never add versions to individual `.csproj` files
 
 **Frontend Development:**
 
-- Routes follow file-based structure in `web/src/routes/` (use parentheses for route groups like `(auth)/`)
-- Features organized by domain: `web/src/features/{domain}/{feature}/` with `components/`, `hooks/`, `schemas/` subfolders
-- API calls structured: `web/src/api/{domain}/{feature}/` with separate `endpoint.ts`, `request.ts`, `response.ts` files
+- Routes follow file-based structure in `web/src/routes/` and `admin/src/routes/` (use parentheses for route groups like `(auth)/`)
+- Features organized by domain: `{web|admin}/src/features/{domain}/{feature}/` with `components/`, `hooks/`, `schemas/` subfolders
+- API calls structured: `{web|admin}/src/api/{domain}/{feature}/` with separate `endpoint.ts`, `request.ts`, `response.ts` files
 
 ### Things to Avoid
 
 - Don't write a \*.md file summarizing the conversation
-- Never run commands: `dotnet run`, `bun run dev`, `dotnet watch` etc
+- Never run commands: `dotnet run`, `bun run dev`, `dotnet watch` etc (use make commands and VSCode tasks)
 - Do not write files other than page files inside the `routes/` folder
 - Avoid direct package version references in `.csproj` files (use centralized `Directory.Packages.props`)
+- Don't start both `web` and `admin` on same port - web uses 3000, admin uses 3100
 
 ### Safety and Permissions
 
@@ -97,8 +105,11 @@ Ask first:
 
 ```bash
 make api-build          # Build solution
-make db-add name=Name  # Add migration
-make db-update         # Apply migrations
+make api-clean          # Clean solution
+make api-restore        # Restore packages
+make db-add name=Name   # Add migration
+make db-update          # Apply migrations
+make db-list            # List migrations
 ```
 
 **Package Management:**
@@ -116,7 +127,9 @@ make db-update         # Apply migrations
 - `api/src/App.Application` - Business logic and CQRS handlers
 - `api/src/App.Infrastructure` - EF Core and external services
 - `web/src/features` - Feature-specific React components and logic
+- `admin/src/features` - Admin-specific feature components and logic
 - `web/src/api` - Frontend API client functions
+- `admin/src/api` - Admin frontend API client functions
 - `web/src/locales` - i18next translation files
 
 ### Good and bad examples

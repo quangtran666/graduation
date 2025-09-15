@@ -21,101 +21,16 @@
     }
   },
   "login": {
-    "pageTitle": "Login",
-    "title": "Login to your account",
-    "description": "Enter your email below to login to your account",
+    "pageTitle": "Admin Login",
+    "description": "Enter your admin credentials to access the dashboard",
     "email": "Email",
-    "usernameOrEmail": "Username or email",
     "password": "Password",
-    "forgotPassword": "Forgot your password?",
-    "remember": "Remember me",
-    "noAccount": "Don't have an account?",
-    "signUp": "Sign up",
+    "button": "Login to admin panel",
     "validation": {
-      "usernameOrEmailInvalid": "Username or email is invalid",
+      "email": "Username or email is invalid",
       "passwordRequired": "Password is required"
     },
     "success": "Login successful",
     "error": "Login failed"
-  },
-  "register": {
-    "pageTitle": "Register",
-    "title": "Create an account",
-    "description": "Enter your email below to create an account",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
-    "signUp": "Sign up",
-    "username": "Username",
-    "validation": {
-      "email": "Email is required",
-      "password": "Password is required",
-      "username": "Username is required",
-      "confirmPassword": "Confirm password is required",
-      "passwordMismatch": "Passwords do not match",
-      "usernameNoSpaces": "Username cannot contain spaces"
-    },
-    "success": "Account created successfully, please check your email to verify",
-    "error": {
-      "userExists": "User already exists",
-      "invalidInput": "Please check your input",
-      "failed": "Registration failed. Please try again."
-    }
-  },
-  "forgotPassword": {
-    "title": "Forgot your password?",
-    "description": "Enter your email below to reset your password",
-    "email": "Email",
-    "resetPassword": "Reset password",
-    "rememberPassword": "Remember your password?",
-    "validation": {
-      "emailInvalid": "Email is invalid"
-    },
-    "success": "Password reset email sent successfully. Please check your email."
-  },
-  "resetPassword": {
-    "title": "Reset password",
-    "description": "Enter your new password below",
-    "password": "New password",
-    "confirmPassword": "Confirm password",
-    "resetPassword": "Reset password",
-    "rememberPassword": "Remember your password?",
-    "validation": {
-      "passwordMismatch": "Passwords do not match",
-      "tokenInvalid": "Invalid or missing reset token"
-    },
-    "success": "Password reset successfully! Please sign in with your new password.",
-    "error": "Password reset failed"
-  },
-  "verifyEmail": {
-    "title": "Verify your email",
-    "description": "A verification link has been sent to your email. Please check your inbox and click the link to verify your email address.",
-    "resendTitle": "Didn't receive the email? Check your spam folder or try resending.",
-    "resend": "Resend verification email",
-    "backToLogin": "Back to login",
-    "success": "Verification email resent successfully. Please check your email.",
-    "cooldown": "Retry in {{seconds}}s.",
-    "error": {
-      "userNotFound": "User not found",
-      "waitingPeriodOrAlreadyVerified": "Email is already verified or waiting for cooldown period",
-      "failed": "Failed to resend verification email. Please try again later."
-    }
-  },
-  "emailConfirm": {
-    "title": "Email verified",
-    "description": "Your email has been successfully verified. You can now access all features of your account.",
-    "verifying": {
-      "title": "Verifying Your Email",
-      "description": "Please wait while we verify your email address..."
-    },
-    "success": {
-      "title": "Email Verified Successfully!",
-      "description": "Your email has been verified. You can now sign in to your account."
-    },
-    "error": {
-      "title": "Verification Failed",
-      "description": "We couldn't verify your email. The link may be expired or invalid.",
-      "failed": "Email verification failed. The verification link may be invalid or expired."
-    }
   }
 }

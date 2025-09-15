@@ -13,4 +13,9 @@
     <PackageReference Include="MediatR" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Admin\" />
+    <Folder Include="User\" />
+  </ItemGroup>
+
 </Project>

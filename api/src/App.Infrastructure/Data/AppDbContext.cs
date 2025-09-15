@@ -7,6 +7,8 @@ using App.Infrastructure.Data.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
+using DomainUser = App.Domain.Entities.User;
+
 namespace App.Infrastructure.Data;
 
 public class AppDbContext : DbContext
@@ -22,7 +24,7 @@ public class AppDbContext : DbContext
     _configuration = configuration;
   }
 
-  public DbSet<User> Users { get; set; }
+  public DbSet<DomainUser> Users { get; set; }
   public DbSet<Role> Roles { get; set; }
   public DbSet<Permission> Permissions { get; set; }
   public DbSet<UserRole> UserRoles { get; set; }

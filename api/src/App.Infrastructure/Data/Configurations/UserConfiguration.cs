@@ -1,20 +1,21 @@
-using App.Domain.Entities;
 using App.Domain.Enums;
 using App.Infrastructure.Data.Configurations.Base;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using UserDomain = App.Domain.Entities.User;
+
 namespace App.Infrastructure.Data.Configurations;
 
-public class UserConfiguration : BaseEntityConfiguration<User>
+public class UserConfiguration : BaseEntityConfiguration<UserDomain>
 {
   const int USERNAME_MAX_LENGTH = 50;
   const int EMAIL_MAX_LENGTH = 255;
   const int PASSWORD_HASH_MAX_LENGTH = 255;
   const int SUSPENSION_REASON_MAX_LENGTH = 500;
 
-  public override void Configure(EntityTypeBuilder<User> builder)
+  public override void Configure(EntityTypeBuilder<UserDomain> builder)
   {
     base.Configure(builder);
 

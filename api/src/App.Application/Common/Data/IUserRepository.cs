@@ -1,12 +1,12 @@
-using App.Domain.Entities;
+using UserDomain = App.Domain.Entities.User;
 
 namespace App.Application.Common.Data;
 
 public interface IUserRepository
 {
-  Task<User?> GetByEmailAsync(string email);
-  Task<User?> GetByIdAsync(int id);
-  Task<User?> GetByEmailOrUsernameAsync(string emailOrUsername);
+  Task<UserDomain?> GetByEmailAsync(string email);
+  Task<UserDomain?> GetByIdAsync(int id);
+  Task<UserDomain?> GetByEmailOrUsernameAsync(string emailOrUsername);
   Task<bool> ExistsAsync(string username, string email);
-  User Create(User user);
+  UserDomain Create(UserDomain user);
 }
