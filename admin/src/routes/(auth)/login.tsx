@@ -3,7 +3,7 @@ import { Shield } from "lucide-react";
 
 import { LanguageSwitch } from "@/components/common/language-switch";
 import { ModeToggle } from "@/components/common/theme-switch";
-import { LoginForm } from "@/features/login/components/login-form";
+import { LoginForm } from "@/features/auth/login/components/login-form";
 
 export const Route = createFileRoute("/(auth)/login")({
   head: ({ match }) => ({

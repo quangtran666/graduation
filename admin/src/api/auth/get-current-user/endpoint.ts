@@ -1,8 +1,7 @@
+import type { GetCurrentUserResponse } from "@/api/auth/get-current-user/response";
 import { apiClient } from "@/api/client";
 
-import { type GetCurrentUserResponse } from "./response";
-
 export const getCurrentUserEndpoint = async (): Promise<GetCurrentUserResponse> => {
-  const response = await apiClient.get<GetCurrentUserResponse>("/api/auth/me");
+  const response = await apiClient.get<GetCurrentUserResponse>("/api/admin/auth/me");
   return response.data;
 };

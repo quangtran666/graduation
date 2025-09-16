@@ -5,11 +5,7 @@ export const useLoginSchema = () => {
   const { t } = useTranslation("form");
 
   const LOGIN_SCHEMA = z.object({
-    email: z
-      .email({
-        error: t("common.form.required", { field: t("common.form.name.email") }),
-      })
-      .max(50, { error: t("common.form.max", { length: 50 }) }),
+    email: z.email({ error: t("login.validation.email") }),
     password: z
       .string({
         error: t("common.form.required", { field: t("common.form.name.password") }),

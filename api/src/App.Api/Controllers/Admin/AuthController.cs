@@ -1,4 +1,7 @@
 using App.Application.Admin.Auth.Commands.Login;
+using App.Application.Admin.Auth.Commands.Logout;
+using App.Application.Admin.Auth.Commands.RefreshToken;
+using App.Application.Admin.Auth.Queries.GetCurrentUser;
 using App.Contract.Admin.Auth.Requests;
 using App.Contract.Admin.Auth.Responses;
 
@@ -6,6 +9,7 @@ using ErrorOr;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Api.Controllers.Admin;
@@ -47,6 +51,73 @@ public class AuthController : ControllerBase
           ErrorType.NotFound => StatusCodes.Status401Unauthorized,
           ErrorType.Validation => StatusCodes.Status401Unauthorized,
           ErrorType.Forbidden => StatusCodes.Status403Forbidden,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("refresh")]
+  public async Task<IActionResult> RefreshToken()
+  {
+    var command = new RefreshTokenCommand();
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      refreshResult => Ok(new RefreshTokenResponse(
+        refreshResult.Message
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.Validation => StatusCodes.Status401Unauthorized,
+          ErrorType.Forbidden => StatusCodes.Status403Forbidden,
+          _ => StatusCodes.Status500InternalServerError
+        },
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpPost("logout")]
+  public async Task<IActionResult> Logout()
+  {
+    var command = new LogoutCommand();
+    var result = await _mediator.Send(command);
+
+    return result.MatchFirst(
+      message => Ok(new LogoutResponse(message)),
+      error => Problem(
+        statusCode: StatusCodes.Status500InternalServerError,
+        title: error.Description
+      )
+    );
+  }
+
+  [HttpGet("me")]
+  [Authorize]
+  public async Task<IActionResult> GetCurrentUser()
+  {
+    var query = new GetCurrentUserQuery();
+    var result = await _mediator.Send(query);
+
+    return result.MatchFirst(
+      getCurrentUserResult => Ok(new GetCurrentUserResponse(
+        getCurrentUserResult.Message,
+        new UserInfo(
+          getCurrentUserResult.User.Id,
+          getCurrentUserResult.User.Username,
+          getCurrentUserResult.User.Email,
+          getCurrentUserResult.User.EmailVerified
+        )
+      )),
+      error => Problem(
+        statusCode: error.Type switch
+        {
+          ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
+          ErrorType.NotFound => StatusCodes.Status404NotFound,
+          ErrorType.Validation => StatusCodes.Status400BadRequest,
           _ => StatusCodes.Status500InternalServerError
         },
         title: error.Description

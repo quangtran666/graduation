@@ -4,6 +4,6 @@ import { type LoginRequest } from "./request";
 import { type LoginResponse } from "./response";
 
 export const loginEndpoint = async (data: LoginRequest): Promise<LoginResponse> => {
-  const response = await apiClient.post<LoginResponse>("/api/auth/login", data);
+  const response = await apiClient.post<LoginResponse>("/api/admin/auth/login", data);
   return response.data;
 };
