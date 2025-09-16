@@ -1,9 +1,9 @@
 using App.Application.Admin.Auth.Constants;
+using App.Application.Auth.Services;
 using App.Application.Common.Constants;
 using App.Application.Common.Data;
 using App.Application.Common.Models;
 using App.Application.User.Auth.Configurations;
-using App.Application.User.Auth.Services;
 using App.Domain.Enums;
 
 using ErrorOr;
@@ -70,7 +70,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<LoginRe
       }
     }
 
-    var hasAdminRole = user.UserRoles.Any(ur => ur.Role.Name == RoleConstants.ADMIN);
+    var hasAdminRole = user.UserRoles.Any(ur => ur.Role.Name.Equals(RoleConstants.ADMIN, StringComparison.OrdinalIgnoreCase));
     if (!hasAdminRole)
       return Error.Forbidden(AdminAuthErrors.User.NOT_ADMIN, "Access denied. Admin privileges required.");
 

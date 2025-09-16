@@ -3,9 +3,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+using App.Application.Auth.Services;
 using App.Application.User.Auth.Configurations;
 using App.Application.User.Auth.Constants;
-using App.Application.User.Auth.Services;
 
 using ErrorOr;
 
@@ -14,7 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using UserDomain = App.Domain.Entities.User;
 
-namespace App.Infrastructure.User.Auth.Services;
+namespace App.Infrastructure.Auth.Services;
 
 public class TokenService : ITokenService
 {

@@ -1,8 +1,8 @@
-using App.Application.User.Auth.Services;
+using App.Application.Auth.Services;
 
 using static BCrypt.Net.BCrypt;
 
-namespace App.Infrastructure.User.Auth.Services;
+namespace App.Infrastructure.Auth.Services;
 
 public class PasswordService : IPasswordService
 {

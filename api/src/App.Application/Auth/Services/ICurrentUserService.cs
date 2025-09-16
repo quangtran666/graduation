@@ -1,6 +1,6 @@
 using ErrorOr;
 
-namespace App.Application.User.Auth.Services;
+namespace App.Application.Auth.Services;
 
 public interface ICurrentUserService
 {

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 using UserDomain = App.Domain.Entities.User;
 
-namespace App.Infrastructure.User.Auth.Events;
+namespace App.Infrastructure.Auth.Events;
 
 public class JwtEvents : JwtBearerEvents
 {

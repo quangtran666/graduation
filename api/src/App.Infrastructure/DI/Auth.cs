@@ -1,9 +1,10 @@
 using System.Text;
 
+using App.Application.Auth.Services;
 using App.Application.User.Auth.Configurations;
 using App.Application.User.Auth.Services;
-using App.Infrastructure.User.Auth.Events;
-using App.Infrastructure.User.Auth.Services;
+using App.Infrastructure.Auth.Events;
+using App.Infrastructure.Auth.Services;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;

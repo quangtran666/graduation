@@ -39,25 +39,10 @@ public class UserRepository : IUserRepository
   {
     return await _context.Users
       .AsNoTracking()
-      .Where(x => x.Email == email)
-      .Select(u => new UserDomain
-      {
-        Id = u.Id,
-        Email = u.Email,
-        Username = u.Username,
-        PasswordHash = u.PasswordHash,
-        UserRoles = u.UserRoles.Select(ur => new UserRole
-        {
-          UserId = ur.UserId,
-          RoleId = ur.RoleId,
-          Role = new Role
-          {
-            Id = ur.Role.Id,
-            Name = ur.Role.Name
-          }
-        }).ToList()
-      })
-      .FirstOrDefaultAsync();
+      .AsSplitQuery()
+      .Include(u => u.UserRoles)
+        .ThenInclude(ur => ur.Role)
+      .FirstOrDefaultAsync(u => u.Email == email);
   }
 
   public UserDomain Create(UserDomain user)

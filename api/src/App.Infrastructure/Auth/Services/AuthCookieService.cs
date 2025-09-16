@@ -1,10 +1,10 @@
+using App.Application.Auth.Services;
 using App.Application.User.Auth.Configurations;
-using App.Application.User.Auth.Services;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
-namespace App.Infrastructure.User.Auth.Services;
+namespace App.Infrastructure.Auth.Services;
 
 public class AuthCookieService : IAuthCookieService
 {

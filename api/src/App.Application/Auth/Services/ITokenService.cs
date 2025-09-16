@@ -2,7 +2,7 @@ using ErrorOr;
 
 using UserDomain = App.Domain.Entities.User;
 
-namespace App.Application.User.Auth.Services;
+namespace App.Application.Auth.Services;
 
 public interface ITokenService
 {

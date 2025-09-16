@@ -1,5 +1,5 @@
+using App.Application.Auth.Services;
 using App.Application.Common.Models;
-using App.Application.User.Auth.Services;
 
 using ErrorOr;
 
