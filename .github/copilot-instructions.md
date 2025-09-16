@@ -7,6 +7,8 @@
 - Never use magic strings/numbers - find relative constant files or create new ones
 - Do not use fully qualified names, instead use qualified namespace imports or aliases
 - Use `record` types for commands/queries and DTOs (see `LoginCommand` pattern)
+- If when querying with EFCore, there is more than one Include, then SplitQuery will be used to optimize performance
+- If the query only for retriving data, use AsNoTracking to improve performance
 
 ### Project-Specific Workflows
 

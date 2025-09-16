@@ -7,6 +7,7 @@ public interface IUserRepository
   Task<UserDomain?> GetByEmailAsync(string email);
   Task<UserDomain?> GetByIdAsync(int id);
   Task<UserDomain?> GetByEmailOrUsernameAsync(string emailOrUsername);
+  Task<UserDomain?> GetByEmailWithRolesAsync(string email);
   Task<bool> ExistsAsync(string username, string email);
   UserDomain Create(UserDomain user);
 }

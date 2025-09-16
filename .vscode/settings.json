@@ -29,5 +29,13 @@
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.enabledFrameworks": [
     "react-i18next"
-  ]
+  ],
+  "rest-client.environmentVariables": {
+    "development": {
+      "baseUrl": "http://localhost:5246"
+    },
+    "production": {
+      "baseUrl": "https://api.yourapp.com"
+    }
+  }
 }

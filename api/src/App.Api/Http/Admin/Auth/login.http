@@ -1,0 +1,10 @@
+@adminEmail = admin@example.com
+@adminPassword = 12345678
+
+POST {{baseUrl}}/api/admin/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}

@@ -1,5 +1,6 @@
 
 using App.Application.Common.Data;
+using App.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +33,31 @@ public class UserRepository : IUserRepository
   {
     return await _context.Users
       .FirstOrDefaultAsync(x => x.Email == emailOrUsername || x.Username == emailOrUsername);
+  }
+
+  public async Task<UserDomain?> GetByEmailWithRolesAsync(string email)
+  {
+    return await _context.Users
+      .AsNoTracking()
+      .Where(x => x.Email == email)
+      .Select(u => new UserDomain
+      {
+        Id = u.Id,
+        Email = u.Email,
+        Username = u.Username,
+        PasswordHash = u.PasswordHash,
+        UserRoles = u.UserRoles.Select(ur => new UserRole
+        {
+          UserId = ur.UserId,
+          RoleId = ur.RoleId,
+          Role = new Role
+          {
+            Id = ur.Role.Id,
+            Name = ur.Role.Name
+          }
+        }).ToList()
+      })
+      .FirstOrDefaultAsync();
   }
 
   public UserDomain Create(UserDomain user)
