@@ -22,7 +22,7 @@ public class UserRoleConfiguration : BaseAuditableConfiguration<UserRole>
       .OnDelete(DeleteBehavior.Cascade);
     builder
       .HasOne(x => x.Role)
-      .WithMany()
+      .WithMany(x => x.UserRoles)
       .HasForeignKey(x => x.RoleId)
       .OnDelete(DeleteBehavior.Cascade);
     builder.HasQueryFilter(x => x.User.DeletedAt == null);

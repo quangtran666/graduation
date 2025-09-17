@@ -12,4 +12,7 @@ public class Role : IAuditable
   public string DisplayName { get; set; } = string.Empty;
   public string? Description { get; set; }
   public bool IsDefault { get; set; }
+
+  public virtual ICollection<UserRole> UserRoles { get; set; } = [];
+  public virtual ICollection<RolePermission> RolePermissions { get; set; } = [];
 }

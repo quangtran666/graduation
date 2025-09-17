@@ -12,4 +12,7 @@ public class Permission : IAuditable
   public string DisplayName { get; set; } = string.Empty;
   public string? Description { get; set; }
   public string Category { get; set; } = string.Empty;
+
+  public virtual ICollection<UserPermission> UserPermissions { get; set; } = [];
+  public virtual ICollection<RolePermission> RolePermissions { get; set; } = [];
 }

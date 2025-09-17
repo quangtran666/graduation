@@ -1,7 +1,9 @@
+using App.Api.Authorization.Attributes;
 using App.Application.Admin.Auth.Commands.Login;
 using App.Application.Admin.Auth.Commands.Logout;
 using App.Application.Admin.Auth.Commands.RefreshToken;
 using App.Application.Admin.Auth.Queries.GetCurrentUser;
+using App.Application.Common.Constants;
 using App.Contract.Admin.Auth.Requests;
 using App.Contract.Admin.Auth.Responses;
 
@@ -97,6 +99,7 @@ public class AuthController : ControllerBase
 
   [HttpGet("me")]
   [Authorize]
+  [RequireRole(RoleConstants.ADMIN)]
   public async Task<IActionResult> GetCurrentUser()
   {
     var query = new GetCurrentUserQuery();

@@ -1,10 +1,18 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SiteHeader } from "@/components/sidebar/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { getCurrentUserQueryOptions } from "@/features/auth/user/query-options/me";
 
 export const Route = createFileRoute("/dashboard")({
+  beforeLoad: async ({ context }) => {
+    if (!context.queryClient) return redirect({ to: "/login" });
+
+    await context.queryClient.ensureQueryData(getCurrentUserQueryOptions).catch(() => {
+      redirect({ to: "/login", search: { redirect: location.href }, throw: true });
+    });
+  },
   component: RouteComponent,
 });
 

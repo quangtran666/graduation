@@ -1,6 +1,5 @@
 
 using App.Application.Common.Data;
-using App.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,6 @@
 using App.Infrastructure.DI;
 
+
 namespace App.Api.DI;
 
 public static class DependencyInjection
@@ -9,6 +10,7 @@ public static class DependencyInjection
     services.AddConfiguration(configuration);
     services.AddControllers();
     services.AddCorsPolicy(configuration);
+    services.AddAuthServices();
     return services;
   }
 

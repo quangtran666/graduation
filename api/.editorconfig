@@ -389,3 +389,8 @@ dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.IDE0058.severity = none
 dotnet_diagnostic.IDE0011.severity = none
 dotnet_diagnostic.IDE0130.severity = warning
+dotnet_diagnostic.S1135.severity = none
+
+# Disable all analyzers for EF Core migrations
+[**/Data/Migrations/*.cs]
+dotnet_analyzer_diagnostic.severity = none
