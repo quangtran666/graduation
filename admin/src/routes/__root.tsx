@@ -20,7 +20,7 @@ function RootComponent() {
     <>
       <HeadContent />
       <Outlet />
-      <TanStackRouterDevtools />
+      <TanStackRouterDevtools initialIsOpen={false} />
       <Toaster /> {/* Todo: Move this to better location */}
     </>
   );

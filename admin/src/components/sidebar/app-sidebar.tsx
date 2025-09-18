@@ -169,7 +169,7 @@ export function AppSidebar({ ...properties }: React.ComponentProps<typeof Sideba
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
