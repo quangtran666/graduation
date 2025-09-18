@@ -15,6 +15,8 @@ import {
   IconSettings,
   IconUsers,
 } from "@tabler/icons-react";
+import { type Icon } from "@tabler/icons-react";
+import type { ValidateLinkOptions } from "@tanstack/react-router";
 import * as React from "react";
 
 import { NavDocuments } from "@/components/sidebar/nav-documents";
@@ -31,39 +33,42 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+export interface NavMainItem {
+  link: ValidateLinkOptions;
+  title: string;
+  icon: Icon;
+}
+
+const navMain = [
+  {
+    link: { to: "/dashboard" },
+    title: "Dashboard",
+    icon: IconDashboard,
   },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "#",
-      icon: IconDashboard,
-    },
-    {
-      title: "Lifecycle",
-      url: "#",
-      icon: IconListDetails,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
-    },
-  ],
+  {
+    link: { to: "/dashboard/user" },
+    title: "Users",
+    icon: IconListDetails,
+  },
+  {
+    link: { to: "/dashboard" },
+    title: "Analytics",
+    icon: IconChartBar,
+  },
+  {
+    link: { to: "/dashboard" },
+    title: "Projects",
+    icon: IconFolder,
+  },
+  {
+    link: { to: "/dashboard" },
+    title: "Team",
+    icon: IconUsers,
+  },
+] as const satisfies ReadonlyArray<NavMainItem>;
+
+const data = {
+  navMain,
   navClouds: [
     {
       title: "Capture",

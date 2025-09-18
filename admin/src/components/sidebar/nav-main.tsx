@@ -1,5 +1,7 @@
-import { type Icon, IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
+import { IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
 
+import type { NavMainItem } from "@/components/sidebar/app-sidebar";
 import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
@@ -9,15 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: Icon;
-  }[];
-}) {
+export function NavMain({ items }: { items: ReadonlyArray<NavMainItem> }) {
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -43,9 +37,14 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
+              <SidebarMenuButton tooltip={item.title} asChild>
+                <Link
+                  {...item.link}
+                  className="flex w-full items-center gap-2 overflow-hidden rounded-md text-left text-sm"
+                >
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
